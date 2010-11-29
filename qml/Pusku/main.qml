@@ -15,7 +15,8 @@ Item {
             fillMode: Image.PreserveAspectFit
             y:height*-1
             x:menuScreen.width/2 - width/2
-            PropertyAnimation on y { to:menuScreen.height/2; duration: 2000; easing.type: Easing.OutBounce}
+
+            PropertyAnimation on y { to:(menuScreen.height/2+50); duration: 2000; easing.type: Easing.OutBounce}
 
             MouseArea {
                 anchors.fill:  parent
