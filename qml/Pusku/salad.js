@@ -4,6 +4,7 @@ var componentInsectItem;
 var gameStarted = false;
 var nbPieces = 20;
 var nbInsects = 5;
+var nbInsectsRemaining = 0;
 
 
 function startGame() {
@@ -34,6 +35,7 @@ function startGame() {
     for (; i < nbPieces + nbInsects; ++i) {
         saladArray[i] = createInsectItem();
     }
+    nbInsectsRemaining = nbInsects;
 }
 
 function createSaladItem() {
@@ -73,7 +75,7 @@ function createInsectItem() {
 
     insectItem.x = Math.random() * (gamescreen.width - insectItem.width);
     insectItem.y = Math.random() * (gamescreen.height - insectItem.height);
-    insectItem.rotation = Math.random() * 360;
+//    insectItem.rotation = Math.random() * 360;
     return insectItem;
 }
 
@@ -82,7 +84,14 @@ function shaking() {
         saladArray[i].x += (Math.random() - 0.5) * 50;
         saladArray[i].y += (Math.random() - 0.5) * 50;
         saladArray[i].z = Math.random() * (nbPieces + nbInsects);
-        saladArray[i].rotation = Math.random() * 360;
-        saladArray[i].state = "shaking";
+        if (i < nbPieces) {
+            saladArray[i].rotation = Math.random() * 360;
+            saladArray[i].state = "shaking";
+        }
     }
+    console.log("shaking!");
+}
+
+function getNbInsectRemaining() {
+    return nbInsectsRemaining.toString();
 }
