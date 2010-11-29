@@ -31,5 +31,4 @@ SOURCES += main.cpp
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 qtcAddDeployment()
 
-OTHER_FILES += \
-    qml/Pusku/SaladItem.qml
+OTHER_FILES +=

@@ -4,7 +4,7 @@ Rectangle {
     id: saladItem
     color: "transparent"
     Image {
-        source: "/Users/fabien/Desktop/Pusku/salad_leaf.svg"
+        source: "salad_leaf.svg"
         anchors.fill: parent
     }
 
