@@ -61,4 +61,6 @@ Item {
         }
 
     }
+
+    function shake() { SaladLogic.shaking() }
 }

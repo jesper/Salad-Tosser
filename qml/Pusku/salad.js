@@ -85,4 +85,5 @@ function shaking() {
         saladArray[i].rotation = Math.random() * 360;
         saladArray[i].state = "shaking";
     }
+    console.log("shaking!");
 }
