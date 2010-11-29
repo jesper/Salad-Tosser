@@ -5,7 +5,7 @@ Rectangle {
     id:insect
     color: "transparent"
     Image {
-        source: "/Users/fabien/Desktop/Pusku/insect.svg"
+        source: "insect.svg"
         anchors.fill: parent
     }
 
