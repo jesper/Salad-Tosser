@@ -8,22 +8,13 @@ Item {
         color: "#A2EF00"
         anchors.fill:  parent
 
-
-        Text {
-            id: logoText
-            text:"Toss my Salad!"
-            font.pointSize: 64
+        Image {
+            id: logoImage
+            source: "tossmysalad.png"
+            fillMode: Image.PreserveAspectFit
+            y: height * -1
             x: parent.width/2 - width/2
-            color: "#CB0077"
-            Text {
-                id: logoTextShadow
-                text: parent.text
-                font.pointSize: parent.font.pointSize
-                y: y+4
-                x: x+4
-                z: parent.z - 1
-                opacity: 0.7
-            }
+            PropertyAnimation on y { to: height+10; duration: 1000; easing.type: Easing.OutBounce}
         }
 
         Rectangle {
@@ -31,12 +22,16 @@ Item {
             color: "#CBF76F"
             width: parent.width/2
             height: parent.height/10
-            anchors.centerIn: parent
+            y: parent.height - height - 10
+            x: parent.width/2 - width/2
+            opacity: 0
+            PropertyAnimation on opacity { to: 1; duration: 2000; easing.type: Easing.InOutSine}
+
 
             Text {
                 anchors.centerIn:  parent
                 text: "Start!"
-                font.pointSize: 32
+                font.pointSize: 34
                 color: "#E567B1"
             }
 
