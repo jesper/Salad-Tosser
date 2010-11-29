@@ -7,7 +7,8 @@ Rectangle {
 
     Text {
         id: instructionsText
-        y: 10
+        y: 20
+        x: parent.width/2 - width/2
         text: "Start the game by clicking the logo."
         font.underline: true
         font.bold: true
@@ -18,7 +19,8 @@ Rectangle {
 
     Text {
         text: "Game written by..."
-        y: instructionsText.height + 50
+        y: instructionsText.height + 100
+        x: parent.width/2 - width/2
         color: "#CB0077"
         font.pointSize: 30
         font.italic: true
@@ -57,20 +59,54 @@ Rectangle {
         height: 150
         width: 150
         fillMode: Image.PreserveAspectFit
-        y: parent.height - height - 30
-        x: 0
+        y: parent.height - height - 50
+        x: width * -1
 
         Text {
             text: "Fabien"
             y: parent.height
+            x: parent.width/2 - width/2
         }
     }
 
+    Image {
+        id:sammiAvatar
+        source: "sammi.png"
+        height: 150
+        width: 150
+        fillMode: Image.PreserveAspectFit
+        y: parent.height - height - 50
+        x: width * -1
+
+        Text {
+            text: "Samuel"
+            y: parent.height
+            x: parent.width/2 - width/2
+        }
+    }
+
+    Image {
+        id:jefeAvatar
+        source: "jefe.png"
+        height: 150
+        width: 150
+        fillMode: Image.PreserveAspectFit
+        y: parent.height - height - 50
+        x: width * -1
+
+        Text {
+            text: "Jesper"
+            y: parent.height
+            x: parent.width/2 - width/2
+        }
+    }
 
     states: [
         State {
             name: "visible"; when: about.opacity == 1
-            PropertyChanges { target: fabsAvatar; x: 500; rotation: 360 }
+            PropertyChanges { target: fabsAvatar; x: (about.width/4)*3-fabsAvatar.width/2; rotation: 360 }
+            PropertyChanges { target: sammiAvatar; x: (about.width/4)*2-sammiAvatar.width/2; rotation: 360 }
+            PropertyChanges { target: jefeAvatar; x: (about.width/4)-jefeAvatar.width/2; rotation: 360 }
         }
     ]
 
@@ -78,7 +114,11 @@ Rectangle {
         Transition {
             from: "";
             to: "visible";
-            NumberAnimation { target: fabsAvatar; properties: "rotation,x"; duration: 800 }
+            SequentialAnimation {
+                NumberAnimation { target: fabsAvatar; properties: "rotation,x"; duration: 800 }
+                NumberAnimation { target: sammiAvatar; properties: "rotation,x"; duration: 800 }
+                NumberAnimation { target: jefeAvatar; properties: "rotation,x"; duration: 800 }
+            }
         }
 
     ]
