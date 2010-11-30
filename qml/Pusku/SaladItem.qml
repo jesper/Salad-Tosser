@@ -11,8 +11,8 @@ Rectangle {
                 return "vegetable.svg";
         }
 
-        sourceSize.height: 150
-        sourceSize.width: 150
+        sourceSize.height: 96
+        sourceSize.width: 96
         fillMode: Image.PreserveAspectFit
 
         anchors.fill: parent

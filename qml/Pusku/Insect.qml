@@ -6,8 +6,8 @@ Rectangle {
     color: "transparent"
     Image {
         source: "insect.svg"
-        sourceSize.height: 50
-        sourceSize.width: 50
+        sourceSize.height: 40
+        sourceSize.width: 40
         fillMode: Image.PreserveAspectFit
         anchors.fill: parent
         smooth: true
