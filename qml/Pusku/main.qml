@@ -6,6 +6,12 @@ Item {
     width: 800
     height: 480
 
+    InGameMenu {
+        id: inGameMenu
+        z: menuScreen.z + 1
+        anchors.centerIn: parent
+    }
+
     Rectangle {
         id: menuScreen
         color: "#A2EF00"
@@ -53,17 +59,19 @@ Item {
         Rectangle {
             id: aboutButton
             color: "#CBF76F"
-            width: 50
-            height: 50
+            width: 75
+            height: 75
             x: parent.width - width
             opacity: 0
+            radius:10
+
             PropertyAnimation on opacity { to: 1; duration: 2000; easing.type: Easing.InOutSine}
 
             Text {
                 id:aboutText
                 anchors.centerIn:  parent
                 text: "?"
-                font.pointSize: 40
+                font.pointSize: 60
                 font.bold: true
                 color: "#E567B1"
             }
