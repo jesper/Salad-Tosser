@@ -35,7 +35,9 @@ function startGame() {
     for (; i < nbPieces + nbInsects; ++i) {
         saladArray[i] = createInsectItem();
     }
+
     nbInsectsRemaining = nbInsects;
+    insectsCount.numberOfInsectsRemaining = nbInsectsRemaining;
 }
 
 function createSaladItem() {
@@ -79,6 +81,8 @@ function createInsectItem() {
     return insectItem;
 }
 
+// Shake the salad!
+// It will move leaves and insects, changing their position and depth.
 function shaking() {
     for (var i = 0; i < nbPieces + nbInsects; ++i) {
         var new_x = saladArray[i].x + (Math.random() - 0.5) * 200;
@@ -95,9 +99,19 @@ function shaking() {
             saladArray[i].state = "shaking";
         }
     }
-    console.log("shaking!");
 }
 
 function getNbInsectRemaining() {
     return nbInsectsRemaining.toString();
+}
+
+// We just killed one insect (yay!).
+// We now need to update the count of remaining insects.
+function insectKilled() {
+    --nbInsectsRemaining;
+    --insectsCount.numberOfInsectsRemaining;
+    if (nbInsectsRemaining == 0) {
+        // We win the game \o/
+        // FIXME
+    }
 }

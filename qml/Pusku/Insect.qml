@@ -1,5 +1,6 @@
 import Qt 4.7
 import Qt.labs.gestures 1.0
+import "salad.js" as SaladLogic
 
 Rectangle {
     id:insect
@@ -27,8 +28,15 @@ Rectangle {
         anchors.fill: parent
         onClicked: {
             insect.state = "dead"
+            SaladLogic.insectKilled();
         }
     }
+
+//    GestureArea {
+//        anchors.fill: parent
+//        onPan: {console.log("pan gesture")}
+//    }
+
     states: State {
         name: "dead";
         PropertyChanges { target: insect; opacity: 0 }

@@ -94,7 +94,16 @@ Item {
             }
         }
 
-    }
+        Item {
+            id: insectsCount;
+            property int numberOfInsectsRemaining;
+            Text {
+                id: insectsCountText
+            }
+            onNumberOfInsectsRemainingChanged: {
+                insectsCountText.text = "Insects Remaining: " + numberOfInsectsRemaining
+            }
+        }
 
     function shake() { SaladLogic.shaking() }
 }
