@@ -38,6 +38,10 @@ function startGame() {
 
     nbInsectsRemaining = nbInsects;
     insectsCount.numberOfInsectsRemaining = nbInsectsRemaining;
+
+    // Countdown init.
+    countdown.sec = 30;
+    countdown.min = 0;
 }
 
 function createSaladItem() {
