@@ -83,6 +83,14 @@ function shaking() {
     for (var i = 0; i < nbPieces + nbInsects; ++i) {
         saladArray[i].x += (Math.random() - 0.5) * 50;
         saladArray[i].y += (Math.random() - 0.5) * 50;
+        if (saladArray[i].x < 0)
+            saladArray[i].x = 0;
+        if (saladArray[i].x > gamescreen.width - saladArray[i].width)
+            saladArray[i].x = gamescreen.width - saladArray[i].width;
+        if (saladArray[i].y < 0)
+            saladArray[i].y = 0;
+        if (saladArray[i].y > gamescreen.height - saladArray[i].height)
+            saladArray[i].y = gamescreen.height - saladArray[i].height;
         saladArray[i].z = Math.random() * (nbPieces + nbInsects);
         if (i < nbPieces) {
             saladArray[i].rotation = Math.random() * 360;
