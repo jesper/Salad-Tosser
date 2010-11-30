@@ -2,7 +2,7 @@ var saladArray;
 var componentSaladItem;
 var componentInsectItem;
 var gameStarted = false;
-var nbPieces = 20;
+var nbPieces = 40;
 var nbInsects = 5;
 var nbInsectsRemaining = 0;
 
@@ -44,7 +44,7 @@ function createSaladItem() {
     if (componentSaladItem == null)
         componentSaladItem = Qt.createComponent("SaladItem.qml");
 
-    var saladItem = componentSaladItem.createObject(gamescreen);
+    var saladItem = componentSaladItem.createObject(gamearea);
     if (saladItem == null) {
         console.log("error creating saladItem");
         console.log(componentSaladItem.errorString());
@@ -54,8 +54,8 @@ function createSaladItem() {
     saladItem.width = Math.random() * 100 + 50;
     saladItem.height = Math.random() * 100 + 50;
 
-    saladItem.x = Math.random() * (gamescreen.width - saladItem.width);
-    saladItem.y = Math.random() * (gamescreen.height - saladItem.height);
+    saladItem.x = Math.random() * (gamearea.width - saladItem.width);
+    saladItem.y = Math.random() * (gamearea.height - saladItem.height);
     saladItem.z = Math.random() * (nbPieces + nbInsects);
     saladItem.rotation = Math.random() * 360;
     return saladItem;
@@ -65,7 +65,7 @@ function createInsectItem() {
     if (componentInsectItem == null)
         componentInsectItem = Qt.createComponent("Insect.qml");
 
-    var insectItem = componentInsectItem.createObject(gamescreen);
+    var insectItem = componentInsectItem.createObject(gamearea);
     if (insectItem == null) {
         console.log("error creating insectItem");
         console.log(componentInsectItem.errorString());
@@ -75,8 +75,8 @@ function createInsectItem() {
     insectItem.width = Math.random() * 30 + 20;
     insectItem.height = Math.random() * 30 + 20;
 
-    insectItem.x = Math.random() * (gamescreen.width - insectItem.width);
-    insectItem.y = Math.random() * (gamescreen.height - insectItem.height);
+    insectItem.x = Math.random() * (gamearea.width - insectItem.width);
+    insectItem.y = Math.random() * (gamearea.height - insectItem.height);
 //    insectItem.rotation = Math.random() * 360;
     return insectItem;
 }
@@ -89,9 +89,9 @@ function shaking() {
         var new_y = saladArray[i].y + (Math.random() - 0.5) * 200;
 
         saladArray[i].x = Math.max(0,
-            Math.min(gamescreen.width - saladArray[i].width, new_x));
+            Math.min(gamearea.width - saladArray[i].width, new_x));
         saladArray[i].y = Math.max(0,
-            Math.min(gamescreen.height - saladArray[i].height, new_y));
+            Math.min(gamearea.height - saladArray[i].height, new_y));
 
         saladArray[i].z = Math.random() * (nbPieces + nbInsects);
         if (i < nbPieces) {

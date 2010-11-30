@@ -7,7 +7,7 @@ Item {
         id: menuScreen
         color: "#A2EF00"
         anchors.fill:  parent
-        z: gamescreen.z + 1
+        z: gamearea.z + 1
 
         Image {
             id: logoImage
@@ -24,7 +24,7 @@ Item {
                 onClicked: {
                     SaladLogic.startGame();
                     menuScreen.state = "hidden";
-                    gamescreen.opacity = 1
+                    gamearea.opacity = 1
                 }
             }
 
@@ -82,27 +82,64 @@ Item {
         opacity: 0
     }
 
+    /*-----------------.
+    | Main game screen |
+    `-----------------*/
     Rectangle {
         id: gamescreen
-        color: "#ddddff"
-        opacity: 0
+        property int margin: 80
         anchors.fill:  parent
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                SaladLogic.shaking();
+
+
+        /*---------------.
+        | Main game area |
+        `---------------*/
+        Rectangle {
+            id: gamearea
+            color: "#ddddff"
+
+            x: parent.margin; y: 0
+            width: parent.width - parent.margin
+            height: parent.height
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    SaladLogic.shaking();
+                }
             }
         }
 
-        Item {
-            id: insectsCount;
-            property int numberOfInsectsRemaining;
-            Text {
-                id: insectsCountText
+        /*--------.
+        | HUD bar |
+        `--------*/
+        // Display information about the game.
+        Rectangle {
+            id: hud
+            color: "#000000"
+            width: parent.margin
+            height: parent.height
+            x: 0
+            y: 0
+            z: gamearea.z + 1
+
+            // Insects count.
+            Item {
+                id: insectsCount;
+                anchors.fill:  parent
+
+                property int numberOfInsectsRemaining;
+
+                Text {
+                    id: insectsCountText
+                    x:10; y:0
+                    color: "white"
+                }
+
+                onNumberOfInsectsRemainingChanged: {
+                    insectsCountText.text = numberOfInsectsRemaining
+                }
             }
-            onNumberOfInsectsRemainingChanged: {
-                insectsCountText.text = "Insects Remaining: " + numberOfInsectsRemaining
-            }
+
         }
     }
 
