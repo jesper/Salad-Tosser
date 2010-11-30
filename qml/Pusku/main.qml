@@ -134,7 +134,8 @@ Item {
 
                 Text {
                     id: insectsCountText
-                    x:15; y:8
+                    x:15
+                    y:parent.height - height - countdownText.height - 18
                     color: "white"
                 }
 
@@ -148,7 +149,8 @@ Item {
                     sourceSize.width: 35
                     fillMode: Image.PreserveAspectFit
                     smooth: true
-                    x: 35; y:5
+                    x: 35
+                    y: parent.height - height - countdownText.height - 20;
                 }
             }
 
