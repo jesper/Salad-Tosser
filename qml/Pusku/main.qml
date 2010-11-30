@@ -12,6 +12,7 @@ Item {
         Image {
             id: logoImage
             source: "tossmysalad.png"
+            smooth: true
             fillMode: Image.PreserveAspectFit
             y:height*-1
             x:menuScreen.width/2 - width/2
