@@ -4,7 +4,13 @@ Rectangle {
     id: saladItem
     color: "transparent"
     Image {
-        source: "salad_leaf.svg"
+        source: {
+            if (Math.random() < 0.5)
+                return "salad_leaf.svg";
+            else
+                return "vegetable.svg";
+        }
+
         sourceSize.height: 150
         sourceSize.width: 150
         fillMode: Image.PreserveAspectFit
