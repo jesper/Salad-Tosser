@@ -65,6 +65,12 @@ Item {
                 color: "#E567B1"
                 x: 5
             }
+
+            MouseArea {
+                onClicked: {
+                    menuScreen.opacity = 1
+                }
+            }
         }
 
         Rectangle {
@@ -82,6 +88,13 @@ Item {
                 font.pointSize: 24
                 color: "#E567B1"
                 x: 5
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    Qt.quit()
+                }
             }
         }
 

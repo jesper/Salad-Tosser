@@ -10,6 +10,7 @@ Item {
         id: inGameMenu
         z: menuScreen.z + 1
         anchors.centerIn: parent
+        opacity: 0
     }
 
     Rectangle {
@@ -133,6 +134,32 @@ Item {
             y: 0
             z: gamearea.z + 1
 
+            // In-Game menu
+            Rectangle {
+                id: menuButton
+                color: "#CBF76F"
+                radius:10
+                width: parent.width - 20
+                height: width
+                x: 10
+                y: 10
+
+                Text {
+                    id: returnScreenText
+                    text: "?"
+                    font.pointSize: 38
+                    font.bold: true
+                    color: "#E567B1"
+                    anchors.centerIn: parent
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        inGameMenu.opacity = 1
+                    }
+                }
+            }
             // Insects count.
             Item {
                 id: insectsCount;
@@ -189,11 +216,11 @@ Item {
                             }
                         }
 
-//                        if (parent.sec > 9) {
-//                            parent.secString = parent.sec
-//                        } else {
-//                            parent.secString = parent.sec
-//                        }
+                        //                        if (parent.sec > 9) {
+                        //                            parent.secString = parent.sec
+                        //                        } else {
+                        //                            parent.secString = parent.sec
+                        //                        }
                         countdownText.text = parent.min + ":" + parent.sec
                     }
                 }
