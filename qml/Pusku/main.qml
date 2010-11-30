@@ -115,7 +115,7 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    SaladLogic.shaking();
+                    SaladLogic.shaking(0, 0);
                 }
             }
         }
@@ -126,7 +126,7 @@ Item {
         // Display information about the game.
         Rectangle {
             id: hud
-            color: "#000000"
+            color: "#333333"
             width: parent.margin
             height: parent.height
             x: 0
@@ -142,19 +142,72 @@ Item {
 
                 Text {
                     id: insectsCountText
-                    x:10; y:0
+                    x:15
+                    y:parent.height - height - countdownText.height - 18
                     color: "white"
                 }
 
                 onNumberOfInsectsRemainingChanged: {
                     insectsCountText.text = numberOfInsectsRemaining
                 }
+
+                Image {
+                    source: "insect.svg"
+                    sourceSize.height: 35
+                    sourceSize.width: 35
+                    fillMode: Image.PreserveAspectFit
+                    smooth: true
+                    x: 35
+                    y: parent.height - height - countdownText.height - 20;
+                }
             }
 
+            // Countdown
+            Item {
+                id: countdown
+                anchors.fill: parent
+
+                property int sec;
+                property int min;
+                property string secString;
+                property bool timeup: false;
+
+                Timer {
+                    interval: 1000; running: true; repeat: true
+                    onTriggered: {
+                        if (!parent.timeup) {
+                            --parent.sec;
+                            if (parent.sec == -1) {
+                                if (parent.min != 0) {
+                                    --parent.min
+                                    parent.sec = 59
+                                } else {
+                                    // Time up!
+                                    parent.sec = 0
+                                    parent.timeup = true;
+                                }
+                            }
+                        }
+
+//                        if (parent.sec > 9) {
+//                            parent.secString = parent.sec
+//                        } else {
+//                            parent.secString = parent.sec
+//                        }
+                        countdownText.text = parent.min + ":" + parent.sec
+                    }
+                }
+
+                Text {
+                    id: countdownText
+                    color: "white"
+                    x: 20; y: parent.height - height - 10;
+                }
+            }
         }
     }
 
-    function shake() {
-        SaladLogic.shaking();
+    function shake(x, y) {
+        SaladLogic.shaking(x, y);
     }
 }
