@@ -1,27 +1,11 @@
 #include <QtGui/QApplication>
 #include <QtGui/QGraphicsObject>
 #include <QtGui/QVector3D>
-#include <QtSensors/QAccelerometer>
+
 #include "qmlapplicationviewer.h"
+#include "accelerometer.h"
 
 #include <cstdio>
-
-class Accelerometer : public QObject
-{
-    Q_OBJECT
-public:
-    Accelerometer();
-    ~Accelerometer();
-
-public slots:
-    void checkReading();
-
-signals:
-    void shake();
-
-private:
-    QtMobility::QAccelerometer *m_accelerometer;
-};
 
 Accelerometer::Accelerometer()
     : m_accelerometer(new QtMobility::QAccelerometer(this))
@@ -60,5 +44,3 @@ int main(int argc, char *argv[])
                      viewer.rootObject(), SLOT(shake()));
     return app.exec();
 }
-
-#include "main.moc"

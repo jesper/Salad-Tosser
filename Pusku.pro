@@ -32,3 +32,6 @@ include(qmlapplicationviewer/qmlapplicationviewer.pri)
 qtcAddDeployment()
 
 OTHER_FILES +=
+
+HEADERS += \
+    accelerometer.h
