@@ -1,6 +1,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QGraphicsObject>
 #include <QtGui/QVector3D>
+#include <QtOpenGL/QGLWidget>
 
 #include "qmlapplicationviewer.h"
 #include "accelerometer.h"
@@ -38,7 +39,8 @@ int main(int argc, char *argv[])
     QmlApplicationViewer viewer;
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationLockLandscape);
     viewer.setMainQmlFile(QLatin1String("qml/Pusku/main.qml"));
-    viewer.showExpanded();
+    viewer.setViewport(new QGLWidget);
+    viewer.showFullScreen();
 
     QObject::connect(&accelerometer, SIGNAL(shake()),
                      viewer.rootObject(), SLOT(shake()));
