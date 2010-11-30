@@ -72,8 +72,8 @@ function createInsectItem() {
         return null;
     }
 
-    insectItem.width = Math.random() * 30 + 20;
-    insectItem.height = Math.random() * 30 + 20;
+    insectItem.width = Math.random() * 30 + 40;
+    insectItem.height = Math.random() * 30 + 40;
 
     insectItem.x = Math.random() * (gamearea.width - insectItem.width);
     insectItem.y = Math.random() * (gamearea.height - insectItem.height);

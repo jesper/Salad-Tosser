@@ -39,13 +39,17 @@ Rectangle {
     states: State {
         name: "dead";
         PropertyChanges { target: insect; opacity: 0 }
+        PropertyChanges { target: insect; scale: 2 }
     }
 
     transitions: [
         Transition {
             from: ""
             to: "dead"
-            NumberAnimation { target: insect; property: "opacity"; duration: 200 }
+            SequentialAnimation {
+                NumberAnimation { target: insect; property: "scale"; easing.type: Easing.OutInQuad; duration: 300 }
+                NumberAnimation { target: insect; property: "opacity"; duration: 400 }
+            }
         }
     ]
 }
