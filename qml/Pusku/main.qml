@@ -3,6 +3,9 @@ import "salad.js" as SaladLogic
 
 
 Item {
+    width: 800
+    height: 480
+
     Rectangle {
         id: menuScreen
         color: "#A2EF00"
