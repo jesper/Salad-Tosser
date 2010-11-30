@@ -13,6 +13,15 @@ Rectangle {
         smooth: true
     }
 
+    Behavior on x {
+         enabled: true;
+         NumberAnimation {easing.type: Easing.OutInQuad}
+     }
+    Behavior on y {
+         enabled: true;
+         NumberAnimation {easing.type: Easing.OutInQuad}
+     }
+
     MouseArea {
         id: mouseArea
         anchors.fill: parent

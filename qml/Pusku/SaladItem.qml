@@ -30,7 +30,11 @@ Rectangle {
          enabled: true;
          NumberAnimation {easing.type: Easing.OutInQuad}
      }
-    Behavior on pos {
+    Behavior on x {
+         enabled: true;
+         NumberAnimation {easing.type: Easing.OutInQuad}
+     }
+    Behavior on y {
          enabled: true;
          NumberAnimation {easing.type: Easing.OutInQuad}
      }

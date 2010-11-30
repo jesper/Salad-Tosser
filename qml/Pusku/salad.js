@@ -81,16 +81,14 @@ function createInsectItem() {
 
 function shaking() {
     for (var i = 0; i < nbPieces + nbInsects; ++i) {
-        saladArray[i].x += (Math.random() - 0.5) * 50;
-        saladArray[i].y += (Math.random() - 0.5) * 50;
-        if (saladArray[i].x < 0)
-            saladArray[i].x = 0;
-        if (saladArray[i].x > gamescreen.width - saladArray[i].width)
-            saladArray[i].x = gamescreen.width - saladArray[i].width;
-        if (saladArray[i].y < 0)
-            saladArray[i].y = 0;
-        if (saladArray[i].y > gamescreen.height - saladArray[i].height)
-            saladArray[i].y = gamescreen.height - saladArray[i].height;
+        var new_x = saladArray[i].x + (Math.random() - 0.5) * 200;
+        var new_y = saladArray[i].y + (Math.random() - 0.5) * 200;
+
+        saladArray[i].x = Math.max(0,
+            Math.min(gamescreen.width - saladArray[i].width, new_x));
+        saladArray[i].y = Math.max(0,
+            Math.min(gamescreen.height - saladArray[i].height, new_y));
+
         saladArray[i].z = Math.random() * (nbPieces + nbInsects);
         if (i < nbPieces) {
             saladArray[i].rotation = Math.random() * 360;
