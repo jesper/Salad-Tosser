@@ -107,7 +107,7 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    SaladLogic.shaking();
+                    SaladLogic.shaking(0, 0);
                 }
             }
         }
@@ -146,7 +146,7 @@ Item {
         }
     }
 
-    function shake() {
-        SaladLogic.shaking();
+    function shake(x, y) {
+        SaladLogic.shaking(x, y);
     }
 }

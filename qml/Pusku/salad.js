@@ -83,12 +83,12 @@ function createInsectItem() {
 
 // Shake the salad!
 // It will move leaves and insects, changing their position and depth.
-function shaking() {
+function shaking(x, y) {
     if (saladArray == null)
         return;
     for (var i = 0; i < nbPieces + nbInsects; ++i) {
-        var new_x = saladArray[i].x + (Math.random() - 0.5) * 200;
-        var new_y = saladArray[i].y + (Math.random() - 0.5) * 200;
+        var new_x = saladArray[i].x + (Math.random() + 0.5) * 6 * x + (Math.random() - 0.5) * 160;
+        var new_y = saladArray[i].y + (Math.random() + 0.5) * 6 * y + (Math.random() - 0.5) * 160;
 
         saladArray[i].x = Math.max(0,
             Math.min(gamearea.width - saladArray[i].width, new_x));

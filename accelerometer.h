@@ -14,7 +14,7 @@ public slots:
     void checkReading();
 
 signals:
-    void shake();
+    void shake(QVariant x, QVariant y);
 
 private:
     QtMobility::QAccelerometer *m_accelerometer;

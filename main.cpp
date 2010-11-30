@@ -24,8 +24,8 @@ void Accelerometer::checkReading()
 {
     QtMobility::QAccelerometerReading *reading = m_accelerometer->reading();
 
-    if (QVector3D(reading->x(), reading->y(), reading->z()).length() > 20.0)
-        emit shake();
+    if (QVector3D(reading->x(), reading->y(), reading->z()).length() > 16.0)
+        emit shake(-reading->x(), reading->y());
 }
 
 int main(int argc, char *argv[])
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     viewer.setViewport(new QGLWidget);
     viewer.showFullScreen();
 
-    QObject::connect(&accelerometer, SIGNAL(shake()),
-                     viewer.rootObject(), SLOT(shake()));
+    QObject::connect(&accelerometer, SIGNAL(shake(QVariant, QVariant)),
+                     viewer.rootObject(), SLOT(shake(QVariant, QVariant)));
     return app.exec();
 }
