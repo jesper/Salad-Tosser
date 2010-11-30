@@ -43,5 +43,6 @@ int main(int argc, char *argv[])
 
     QObject::connect(&accelerometer, SIGNAL(shake(QVariant, QVariant)),
                      viewer.rootObject(), SLOT(shake(QVariant, QVariant)));
+
     return app.exec();
 }

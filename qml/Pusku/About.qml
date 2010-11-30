@@ -12,7 +12,7 @@ Rectangle {
         text: "Start the game by clicking the logo."
         font.underline: true
         font.bold: true
-        font.pointSize: 32
+        font.pointSize: 28
         color: "#CB0077"
 
     }
@@ -22,23 +22,24 @@ Rectangle {
         y: instructionsText.height + 100
         x: parent.width/2 - width/2
         color: "#CB0077"
-        font.pointSize: 30
+        font.pointSize: 28
         font.italic: true
     }
 
     Rectangle {
         id: closeButton
         color: "#CBF76F"
-        width: 50
-        height: 50
+        width: 75
+        height: 75
         x: parent.width - width
         opacity: 1
+        radius:10
 
         Text {
             id:aboutText
             anchors.centerIn:  parent
             text: "X"
-            font.pointSize: 40
+            font.pointSize: 60
             font.bold: true
             color: "#E567B1"
         }
