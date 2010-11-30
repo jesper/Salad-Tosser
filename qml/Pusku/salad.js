@@ -42,6 +42,7 @@ function startGame() {
     // Countdown init.
     countdown.sec = 30;
     countdown.min = 0;
+    countdown.timeup = false;
 }
 
 function createSaladItem() {

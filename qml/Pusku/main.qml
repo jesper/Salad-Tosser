@@ -147,6 +147,8 @@ Item {
                     source: "insect.svg"
                     sourceSize.height: 35
                     sourceSize.width: 35
+                    width: 35
+                    height: 35
                     fillMode: Image.PreserveAspectFit
                     smooth: true
                     x: 35
@@ -162,7 +164,7 @@ Item {
                 property int sec;
                 property int min;
                 property string secString;
-                property bool timeup: false;
+                property bool timeup: true;
 
                 Timer {
                     interval: 1000; running: true; repeat: true
@@ -181,12 +183,12 @@ Item {
                             }
                         }
 
-//                        if (parent.sec > 9) {
-//                            parent.secString = parent.sec
-//                        } else {
-//                            parent.secString = parent.sec
-//                        }
-                        countdownText.text = parent.min + ":" + parent.sec
+                        if (parent.sec > 9) {
+                            parent.secString = parent.sec
+                        } else {
+                            parent.secString = "0" + parent.sec
+                        }
+                        countdownText.text = parent.min + ":" + parent.secString
                     }
                 }
 
