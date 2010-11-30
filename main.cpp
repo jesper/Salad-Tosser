@@ -33,7 +33,6 @@ int main(int argc, char *argv[])
     QApplication::setGraphicsSystem("raster");
     QApplication app(argc, argv);
 
-    printf("Starting accelerometer\n");
     Accelerometer accelerometer;
 
     QmlApplicationViewer viewer;
