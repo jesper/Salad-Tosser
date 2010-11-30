@@ -104,6 +104,5 @@ Item {
                 insectsCountText.text = "Insects Remaining: " + numberOfInsectsRemaining
             }
         }
-
-    function shake() { SaladLogic.shaking() }
+    }
 }
