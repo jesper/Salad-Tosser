@@ -5,7 +5,12 @@ Rectangle {
     color: "transparent"
     Image {
         source: "salad_leaf.svg"
+        sourceSize.height: 150
+        sourceSize.width: 150
+        fillMode: Image.PreserveAspectFit
+
         anchors.fill: parent
+        smooth: true
     }
 
     MouseArea {
