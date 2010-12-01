@@ -62,6 +62,8 @@ function startGame() {
     countdown.sec = 30;
     countdown.min = 0;
     countdown.freeze = false;
+
+    health.healthCount = 2;
 }
 
 function createSaladItem() {
