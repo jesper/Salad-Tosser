@@ -157,6 +157,7 @@ Item {
                     anchors.fill: parent
                     onClicked: {
                         inGameMenu.opacity = 1
+                        countdown.freeze = true
                     }
                 }
             }
@@ -199,12 +200,12 @@ Item {
                 property int sec;
                 property int min;
                 property string secString;
-                property bool timeup: true;
+                property bool freeze: true;
 
                 Timer {
                     interval: 1000; running: true; repeat: true
                     onTriggered: {
-                        if (!parent.timeup) {
+                        if (!parent.freeze) {
                             --parent.sec;
                             if (parent.sec == -1) {
                                 if (parent.min != 0) {
@@ -213,10 +214,11 @@ Item {
                                 } else {
                                     // Time up!
                                     parent.sec = 0
-                                    parent.timeup = true;
+                                    parent.freeze = true;
                                     if (insectsCount.numberOfInsectsRemaining > 0) {
                                         // We have lost! :(
-                                        // FIXME
+                                        SaladLogic.gameOver("timeout")
+
                                     }
                                 }
                             }

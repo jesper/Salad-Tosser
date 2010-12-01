@@ -15,6 +15,7 @@ Popup {
             anchors.fill:  parent
             onClicked:  {
                 menuWindow.opacity = 0
+                countdown.timeup = false
             }
         }
     }

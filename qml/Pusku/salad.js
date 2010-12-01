@@ -4,7 +4,6 @@ var componentInsectItem;
 var gameStarted = false;
 var nbPieces = 40;
 var nbInsects = 5;
-//var nbInsectsRemaining = 0;
 
 
 function startGame() {
@@ -36,13 +35,12 @@ function startGame() {
         saladArray[i] = createInsectItem();
     }
 
-//    nbInsectsRemaining = nbInsects;
     insectsCount.numberOfInsectsRemaining = nbInsects;
 
     // Countdown init.
     countdown.sec = 30;
     countdown.min = 0;
-    countdown.timeup = false;
+    countdown.freeze = false;
 }
 
 function createSaladItem() {
@@ -111,12 +109,23 @@ function shaking(x, y) {
 // We just killed one insect (yay!).
 // We now need to update the count of remaining insects.
 function insectKilled() {
-//    --nbInsectsRemaining;
     --insectsCount.numberOfInsectsRemaining;
     if (insectsCount.numberOfInsectsRemaining == 0) {
         // We win the game \o/
-        countdown.timeup = true
-        console.log("done")
-        // FIXME
+        gameOver("win");
     }
+}
+
+// The game is over.
+function gameOver(type) {
+    countdown.freeze = true
+
+    if (type == "win") {
+        console.log("You won the game! Congrats!")
+    } else if (type == "timeout") {
+
+    } else {
+        console.log("Error: unsupported type of game over \"" + type + "\"")
+    }
+
 }
