@@ -23,6 +23,5 @@ Item {
         y: 10
         width: parent.width - 20
         height: parent.height - 20
-
     }
 }

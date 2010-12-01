@@ -14,7 +14,11 @@ Popup {
         MouseArea {
             anchors.fill:  parent
             onClicked:  {
-                menuWindow.opacity = 0
+                menuWindow.opacity = 0;
+                console.log("click yo!");
+                audio.play();
+                console.log("Done clckin");
+
             }
         }
     }

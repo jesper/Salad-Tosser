@@ -2,11 +2,13 @@
 #include <QtGui/QGraphicsObject>
 #include <QtGui/QVector3D>
 #include <QtOpenGL/QGLWidget>
+#include <QtDeclarative/QDeclarativeContext>
 
 #include "qmlapplicationviewer.h"
 #include "accelerometer.h"
-
+#include "audio.h"
 #include <cstdio>
+
 
 Accelerometer::Accelerometer()
     : m_accelerometer(new QtMobility::QAccelerometer(this))
@@ -34,10 +36,13 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     Accelerometer accelerometer;
+    Audio audio;
 
     QmlApplicationViewer viewer;
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationLockLandscape);
     viewer.setMainQmlFile(QLatin1String("qml/Pusku/main.qml"));
+
+    viewer.rootContext()->setContextProperty("audio", &audio);
     viewer.setViewport(new QGLWidget);
     viewer.showFullScreen();
 

@@ -4,7 +4,7 @@ folder_01.target = qml
 DEPLOYMENTFOLDERS = folder_01
 
 QT += opengl
-
+MOBILITY = multimedia
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
 
@@ -36,4 +36,7 @@ qtcAddDeployment()
 OTHER_FILES +=
 
 HEADERS += \
-    accelerometer.h
+    accelerometer.h \
+    audio.h
+
+RESOURCES +=
