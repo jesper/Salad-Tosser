@@ -64,8 +64,10 @@ function createSaladItem() {
         return null;
     }
 
-    saladItem.width = Math.random() * 100 + 50;
-    saladItem.height = Math.random() * 100 + 50;
+    var size = Math.random() * 50 + 80;
+
+    saladItem.width = size;
+    saladItem.height = size;
 
     saladItem.x = Math.random() * (gamearea.width - saladItem.width);
     saladItem.y = Math.random() * (gamearea.height - saladItem.height);
