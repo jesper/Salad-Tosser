@@ -155,6 +155,7 @@ function createInsectItem() {
 
 // Shake the salad!
 function shaking(x, y) {
+    audio.playShake();
     if (saladArray == null)
         return;
 
@@ -181,6 +182,7 @@ function shaking(x, y) {
 // We just killed one insect (yay!).
 // We now need to update the count of remaining insects.
 function insectKilled() {
+    audio.playSquish();
     --insectsCount.numberOfInsectsRemaining;
     if (insectsCount.numberOfInsectsRemaining == 0) {
         // next level!
@@ -191,6 +193,7 @@ function insectKilled() {
 // We just got bitten by one insect (/o\).
 // We now need to update our health.
 function bittenByInsect() {
+    audio.playOuch();
     --health.healthCount;
     if (health.healthCount == 0) {
         gameOver("dead");

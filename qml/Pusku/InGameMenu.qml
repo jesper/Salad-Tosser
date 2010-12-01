@@ -14,7 +14,7 @@ Popup {
         MouseArea {
             anchors.fill:  parent
             onClicked:  {
-                audio.playClick();
+                audio.playReturnToGame();
                 menuWindow.opacity = 0;
                 countdown.timeup = false
             }
@@ -30,7 +30,7 @@ Popup {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                audio.playClick();
+                audio.playReturnToMenu();
                 menuScreen.opacity = 1
                 menuWindow.opacity = 0
                 menuScreen.state = ""
@@ -47,7 +47,7 @@ Popup {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                audio.playClick();
+                audio.playQuit();
                 Qt.quit()
             }
         }

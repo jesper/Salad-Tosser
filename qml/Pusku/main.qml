@@ -37,6 +37,7 @@ Item {
             MouseArea {
                 anchors.fill:  parent
                 onClicked: {
+                    audio.playStartGame();
                     SaladLogic.restartGame();
                     menuScreen.state = "hidden";
                     gamearea.opacity = 1
@@ -85,6 +86,7 @@ Item {
             MouseArea {
                 anchors.fill:  parent
                 onClicked: {
+                    audio.playAbout();
                     aboutScreen.opacity = 1
                 }
             }
