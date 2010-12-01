@@ -1,24 +1,27 @@
 #ifndef AUDIO_H
 #define AUDIO_H
 #include <QtMultimediaKit/QMediaPlayer>
+#include <QFileInfo>
+#include <QDebug>
+#include <QCoreApplication>
 
 class Audio : public QObject {
     Q_OBJECT
 
 public:
-    Audio() {
-        m_player = new QMediaPlayer;
-        m_player->setMedia(QUrl::fromLocalFile("/opt/usr/share/Pusku/qml/Pusku/click.mp3"));
-        m_player->setVolume(100);
+    Audio(QString path) {
+        m_path = path;
+        m_click_player = new QMediaPlayer;
+        m_click_player->setMedia(QUrl::fromLocalFile(m_path+"/click.mp3"));
     };
 
 public slots:
-    void play() {
-        m_player->play();
-        qDebug("Played yo");
+    void playClick() {
+        m_click_player->play();
     }
 private:
-    QMediaPlayer *m_player;
+    QMediaPlayer *m_click_player;
+    QString m_path;
 };
 
 #endif // AUDIO_H

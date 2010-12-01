@@ -14,11 +14,8 @@ Popup {
         MouseArea {
             anchors.fill:  parent
             onClicked:  {
+                audio.playClick();
                 menuWindow.opacity = 0;
-                console.log("click yo!");
-                audio.play();
-                console.log("Done clckin");
-
             }
         }
     }
@@ -32,6 +29,7 @@ Popup {
         MouseArea {
             anchors.fill: parent
             onClicked: {
+                audio.playClick();
                 menuScreen.opacity = 1
                 menuWindow.opacity = 0
                 menuScreen.state = ""
@@ -48,6 +46,7 @@ Popup {
         MouseArea {
             anchors.fill: parent
             onClicked: {
+                audio.playClick();
                 Qt.quit()
             }
         }

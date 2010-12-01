@@ -3,6 +3,7 @@
 #include <QtGui/QVector3D>
 #include <QtOpenGL/QGLWidget>
 #include <QtDeclarative/QDeclarativeContext>
+#include <QDir>
 
 #include "qmlapplicationviewer.h"
 #include "accelerometer.h"
@@ -36,11 +37,14 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     Accelerometer accelerometer;
-    Audio audio;
 
     QmlApplicationViewer viewer;
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationLockLandscape);
     viewer.setMainQmlFile(QLatin1String("qml/Pusku/main.qml"));
+
+// *Horrible hack* to get the path of the sound files (same location as qml files)
+    Audio audio(QFileInfo(viewer.source().toLocalFile()).absoluteDir().path());
+    audio.playClick();
 
     viewer.rootContext()->setContextProperty("audio", &audio);
     viewer.setViewport(new QGLWidget);
