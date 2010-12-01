@@ -4,6 +4,7 @@ import "salad.js" as SaladLogic
 Rectangle {
     id:insect
     color: "transparent"
+
     Image {
         source: "insect.svg"
         sourceSize.height: 40

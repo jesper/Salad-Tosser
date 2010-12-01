@@ -1,10 +1,13 @@
 var saladArray = null;
 var componentSaladItem;
 var componentInsectItem;
+var componentScorpionItem;
 var gameStarted = false;
 var nbPieces = 40;
 var nbInsects = 5;
+var nbScorpions = 1;
 
+var scorpionArray = null;
 
 function startGame() {
     if (gameStarted) {
@@ -35,6 +38,12 @@ function startGame() {
         saladArray[i] = createInsectItem();
     }
 
+    scorpionArray = new Array(nbScorpions);
+
+    for (i = 0; i < nbScorpions; ++i) {
+        scorpionArray[i] = createScorpionItem();
+    }
+
     insectsCount.numberOfInsectsRemaining = nbInsects;
 
     // Countdown init.
@@ -62,6 +71,49 @@ function createSaladItem() {
     saladItem.z = 2 + Math.random() * (nbPieces + nbInsects);
     saladItem.rotation = Math.random() * 360;
     return saladItem;
+}
+
+function createScorpionItem() {
+    if (componentScorpionItem == null)
+        componentScorpionItem = Qt.createComponent("Scorpion.qml");
+
+    var scorpionItem = componentScorpionItem.createObject(gamearea);
+    if (scorpionItem == null) {
+        console.log("error creating scorpionItem");
+        console.log(componentScorpionItem.errorString());
+        return null;
+    }
+
+    scorpionItem.width = 100;
+    scorpionItem.height = 100;
+    scorpionItem.x = Math.random() * (gamearea.width - scorpionItem.width);
+    scorpionItem.y = Math.random() * (gamearea.height - scorpionItem.height);
+    scorpionItem.z = 2;
+
+    console.log("created scorpion item");
+
+    return scorpionItem;
+}
+
+function moveScorpion(scorpionItem) {
+    var new_x;
+    var new_y;
+
+    do {
+        var dir_x = Math.random() - 0.5;
+        var dir_y = Math.random() - 0.5;
+
+        var inv_len = 1 / Math.sqrt(dir_x * dir_x + dir_y * dir_y);
+        dir_x *= inv_len;
+        dir_y *= inv_len;
+
+        new_x = scorpionItem.x + dir_x * 120;
+        new_y = scorpionItem.y + dir_y * 120;
+    } while (new_x < 0 || new_x > (gamearea.width - scorpionItem.width)
+             || new_y < 0 || new_y > (gamearea.height - scorpionItem.height));
+
+    scorpionItem.x = new_x;
+    scorpionItem.y = new_y;
 }
 
 function createInsectItem() {

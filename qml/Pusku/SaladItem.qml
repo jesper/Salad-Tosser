@@ -3,6 +3,7 @@ import Qt 4.7
 Rectangle {
     id: saladItem
     color: "transparent"
+
     Image {
         source: {
             if (Math.random() < 0.5)

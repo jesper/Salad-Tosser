@@ -102,7 +102,6 @@ Item {
         property int margin: 80
         anchors.fill:  parent
 
-
         /*---------------.
         | Main game area |
         `---------------*/
