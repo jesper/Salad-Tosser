@@ -15,7 +15,7 @@ Item {
     }
 
     Rectangle {
-        id:popup
+        id:popupContent
         color: "#A2EF00"
         opacity: 1
         radius: 10
