@@ -1,15 +1,26 @@
 var saladArray = null;
-var componentSaladItem;
-var componentInsectItem;
-var componentScorpionItem;
+var componentSaladItem = null;
+var componentInsectItem = null;
+var componentScorpionItem = null;
 var gameStarted = false;
-var nbPieces = 40;
+var nbPieces = 15;
 var nbInsects = 5;
 var nbScorpions = 2;
 
 var scorpionArray = null;
 
 function restartGame() {
+    nbPieces = 15;
+    nbScorpions = 2;
+
+    gameStarted = false;
+    startGame();
+}
+
+function levelUp() {
+    nbPieces += 4;
+    nbScorpions += 1;
+
     gameStarted = false;
     startGame();
 }
@@ -30,7 +41,6 @@ function startGame() {
 
      //Initialize Board
     saladArray = new Array(nbPieces + nbInsects);
-
 
     for (i = 0; i < nbPieces; ++i) {
         saladArray[i] = createSaladItem();
@@ -67,7 +77,7 @@ function createSaladItem() {
         return null;
     }
 
-    var size = Math.random() * 50 + 80;
+    var size = Math.random() * 30 + 110;
 
     saladItem.width = size;
     saladItem.height = size;
@@ -90,8 +100,8 @@ function createScorpionItem() {
         return null;
     }
 
-    scorpionItem.width = 100;
-    scorpionItem.height = 100;
+    scorpionItem.width = 140;
+    scorpionItem.height = 140;
     scorpionItem.x = Math.random() * (gamearea.width - scorpionItem.width);
     scorpionItem.y = Math.random() * (gamearea.height - scorpionItem.height);
     scorpionItem.z = 2;
@@ -131,8 +141,10 @@ function createInsectItem() {
         return null;
     }
 
-    insectItem.width = Math.random() * 30 + 40;
-    insectItem.height = Math.random() * 30 + 40;
+    var size = 75;
+
+    insectItem.width = size;
+    insectItem.height = size;
 
     insectItem.x = Math.random() * (gamearea.width - insectItem.width);
     insectItem.y = Math.random() * (gamearea.height - insectItem.height);
@@ -171,8 +183,8 @@ function shaking(x, y) {
 function insectKilled() {
     --insectsCount.numberOfInsectsRemaining;
     if (insectsCount.numberOfInsectsRemaining == 0) {
-        // We win the game \o/
-        gameOver("win");
+        // next level!
+        levelUp();
     }
 }
 

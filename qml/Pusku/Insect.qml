@@ -1,15 +1,16 @@
 import Qt 4.7
-import "salad.js" as SaladLogic
 
 Rectangle {
     id:insect
     color: "transparent"
     property bool killed: false
 
+    signal destroyed;
+
     Image {
         source: "insect.svg"
-        sourceSize.height: 40
-        sourceSize.width: 40
+        sourceSize.height: 75
+        sourceSize.width: 75
         fillMode: Image.PreserveAspectFit
         anchors.fill: parent
         smooth: true
@@ -31,7 +32,7 @@ Rectangle {
             if (!killed) {
                 killed = true
                 insect.state = "dead"
-                SaladLogic.insectKilled();
+                main.insectKilled();
             }
         }
     }

@@ -1,5 +1,4 @@
 import Qt 4.7
-import "salad.js" as SaladLogic
 
 Rectangle {
     id: scorpion
@@ -33,7 +32,7 @@ Rectangle {
         onClicked: {
             scorpion.state = "pushed"
 //            scorpion.state = "triggered"
-            SaladLogic.bittenByInsect();
+            main.bittenByInsect();
         }
     }
 
@@ -42,7 +41,7 @@ Rectangle {
         interval: 4000 + 1000 * Math.random(); running: true; repeat: true
         onTriggered: {
             scorpion.moveDuration = 250;
-            SaladLogic.moveScorpion(parent);
+            main.moveScorpion(parent);
         }
     }
 

@@ -6,6 +6,8 @@ Item {
     width: 800
     height: 480
 
+    id: main
+
     InGameMenu {
         id: inGameMenu
         z: menuScreen.z + 1
@@ -301,5 +303,17 @@ Item {
 
     function shake(x, y) {
         SaladLogic.shaking(x, y);
+    }
+
+    function insectKilled() {
+        SaladLogic.insectKilled();
+    }
+
+    function bittenByInsect() {
+        SaladLogic.bittenByInsect();
+    }
+
+    function moveScorpion(scorpioni) {
+        SaladLogic.moveScorpion(scorpioni);
     }
 }
