@@ -21,16 +21,6 @@ function startGame() {
 
     gameStarted = true;
 
-    //Delete blocks from previous game
-//     for (var i = 0; i < maxIndex; i++) {
-//         if (board[i] != null)
-//             board[i].destroy();
-//     }
-
-     //Calculate board size
-//     maxColumn = Math.floor(background.width / blockSize);
-//     maxRow = Math.floor(background.height / blockSize);
-//     maxIndex = maxRow * maxColumn;
     var i;
     if (saladArray != null) {
         for (i = 0; i < saladArray.length; ++i) {
@@ -152,7 +142,6 @@ function createInsectItem() {
 }
 
 // Shake the salad!
-// It will move leaves and insects, changing their position and depth.
 function shaking(x, y) {
     if (saladArray == null)
         return;
