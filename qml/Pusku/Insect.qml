@@ -4,6 +4,7 @@ import "salad.js" as SaladLogic
 Rectangle {
     id:insect
     color: "transparent"
+    property bool killed: false
 
     Image {
         source: "insect.svg"
@@ -27,8 +28,11 @@ Rectangle {
         id: mouseArea
         anchors.fill: parent
         onClicked: {
-            insect.state = "dead"
-            SaladLogic.insectKilled();
+            if (!killed) {
+                killed = true
+                insect.state = "dead"
+                SaladLogic.insectKilled();
+            }
         }
     }
 
