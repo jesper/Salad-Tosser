@@ -4,6 +4,7 @@ import "salad.js" as SaladLogic
 Rectangle {
     id: scorpion
     color: "transparent"
+    state: "default"
 
     Image {
         source: "scorpion.svg"
@@ -30,30 +31,76 @@ Rectangle {
         id: mouseArea
         anchors.fill: parent
         onClicked: {
-            scorpion.state = "triggered"
+            scorpion.state = "pushed"
         }
     }
 
     Timer {
-        interval: 4000; running: true; repeat: true
+        id: moveTimer
+        interval: 4000 + 1000 * Math.random(); running: true; repeat: true
         onTriggered: {
             SaladLogic.moveScorpion(parent);
         }
     }
 
-    states: State {
-        name: "triggered";
-        PropertyChanges { target: scorpion; opacity: 0 }
-        PropertyChanges { target: scorpion; scale: 2 }
+    Timer {
+        id: calmDownTimer
+        interval: 4000; running: false; repeat: false
+        onTriggered: {
+            scorpion.state = "default";
+        }
     }
+
+    function shake() {
+        if (state != "pushed") {
+            scorpion.state = "default";
+            scorpion.state = "angry";
+            calmDownTimer.restart();
+        }
+    }
+
+    states: [
+        State {
+            name: "pushed";
+            PropertyChanges { target: scorpion; opacity: 0 }
+            PropertyChanges { target: scorpion; scale: 2 }
+        },
+        State {
+            name: "default";
+            PropertyChanges { target: moveTimer; interval: 4000 + 1000 * Math.random(); }
+        },
+        State {
+            name: "angry";
+            PropertyChanges { target: moveTimer; interval: 500 + 200 * Math.random(); }
+        }
+    ]
 
     transitions: [
         Transition {
-            from: ""
-            to: "triggered"
+            from: "*"
+            to: "pushed"
             SequentialAnimation {
                 NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; duration: 300 }
                 NumberAnimation { target: scorpion; property: "opacity"; duration: 400 }
+            }
+        },
+        Transition {
+            from: "default"
+            to: "angry"
+            SequentialAnimation {
+                PauseAnimation { duration: 200 }
+                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
+                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
+                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
+                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
+                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
+                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
+                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
+                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
+                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
+                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
+                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
+                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
             }
         }
     ]

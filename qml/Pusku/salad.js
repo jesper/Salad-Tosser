@@ -5,7 +5,7 @@ var componentScorpionItem;
 var gameStarted = false;
 var nbPieces = 40;
 var nbInsects = 5;
-var nbScorpions = 1;
+var nbScorpions = 2;
 
 var scorpionArray = null;
 
@@ -42,6 +42,7 @@ function startGame() {
 
     for (i = 0; i < nbScorpions; ++i) {
         scorpionArray[i] = createScorpionItem();
+        saladArray[saladArray.length] = scorpionArray[i];
     }
 
     insectsCount.numberOfInsectsRemaining = nbInsects;
@@ -89,8 +90,6 @@ function createScorpionItem() {
     scorpionItem.x = Math.random() * (gamearea.width - scorpionItem.width);
     scorpionItem.y = Math.random() * (gamearea.height - scorpionItem.height);
     scorpionItem.z = 2;
-
-    console.log("created scorpion item");
 
     return scorpionItem;
 }
@@ -142,7 +141,7 @@ function createInsectItem() {
 function shaking(x, y) {
     if (saladArray == null)
         return;
-    for (var i = 0; i < nbPieces + nbInsects; ++i) {
+    for (var i = 0; i < saladArray.length; ++i) {
         var new_x = saladArray[i].x + (Math.random() + 0.5) * 6 * x + (Math.random() - 0.5) * 160;
         var new_y = saladArray[i].y + (Math.random() + 0.5) * 6 * y + (Math.random() - 0.5) * 160;
 
@@ -155,6 +154,10 @@ function shaking(x, y) {
             saladArray[i].rotation += Math.random() * 20;
             saladArray[i].state = "shaking";
         }
+    }
+
+    for (var i = 0; i < scorpionArray.length; ++i) {
+        scorpionArray[i].shake();
     }
 }
 
