@@ -152,7 +152,7 @@ function shaking(x, y) {
             Math.min(gamearea.height - saladArray[i].height, new_y));
 
         if (i < nbPieces) {
-            saladArray[i].rotation = Math.random() * 360;
+            saladArray[i].rotation += Math.random() * 20;
             saladArray[i].state = "shaking";
         }
     }
