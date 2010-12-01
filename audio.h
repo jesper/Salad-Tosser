@@ -5,87 +5,113 @@
 #include <QDebug>
 #include <QCoreApplication>
 
+class Player : public QObject {
+public:
+    Player(const QUrl &url, int instances = 1, QObject *parent = 0)
+        : QObject(parent)
+        , m_index(0)
+    {
+        instances = qMax(1, instances);
+        for (int i = 0; i < instances; ++i) {
+            QMediaPlayer *player = new QMediaPlayer(this);
+            player->setMedia(url);
+            m_players << player;
+        }
+    }
+
+    void play()
+    {
+        m_players.at(m_index)->play();
+        m_index++;
+        if (m_index >= m_players.size())
+            m_index = 0;
+    }
+
+private:
+    QVector<QMediaPlayer *> m_players;
+    int m_index;
+};
+
 class Audio : public QObject {
     Q_OBJECT
+
+    enum Sound {
+        StartGame,
+        Click,
+        About,
+        Ouch,
+        Quit,
+        ReturnToGame,
+        ReturnToMenu,
+        Squish,
+        Shake,
+        NumSounds
+    };
 
 public:
     Audio(QString path) {
         m_path = path;
 
-        m_startGame_player = new QMediaPlayer;
-        m_startGame_player->setMedia(QUrl::fromLocalFile(m_path+"/startgame.mp3"));
-
-        m_click_player = new QMediaPlayer;
-        m_click_player->setMedia(QUrl::fromLocalFile(m_path+"/click.mp3"));
-
-        m_about_player = new QMediaPlayer;
-        m_about_player->setMedia(QUrl::fromLocalFile(m_path+"/about.mp3"));
-
-        m_ouch_player = new QMediaPlayer;
-        m_ouch_player->setMedia(QUrl::fromLocalFile(m_path+"/ouch.mp3"));
-
-        m_quit_player = new QMediaPlayer;
-        m_quit_player->setMedia(QUrl::fromLocalFile(m_path+"/quit.mp3"));
-
-        m_returnToGame_player = new QMediaPlayer;
-        m_returnToGame_player->setMedia(QUrl::fromLocalFile(m_path+"/returntogame.mp3"));
-
-        m_returnToMenu_player = new QMediaPlayer;
-        m_returnToMenu_player->setMedia(QUrl::fromLocalFile(m_path+"/returntomenu.mp3"));
-
-        m_squish_player = new QMediaPlayer;
-        m_squish_player->setMedia(QUrl::fromLocalFile(m_path+"/squish.mp3"));
-
-        m_shake_player = new QMediaPlayer;
-        m_shake_player->setMedia(QUrl::fromLocalFile(m_path+"/shake.mp3"));
+        loadSound(StartGame, "startgame.mp3");
+        loadSound(Click, "click.mp3");
+        loadSound(About, "about.mp3");
+        loadSound(Ouch, "ouch.mp3");
+        loadSound(Quit, "quit.mp3");
+        loadSound(ReturnToGame, "returntogame.mp3");
+        loadSound(ReturnToMenu, "returntomenu.mp3");
+        loadSound(Squish, "squish.mp3", 2);
+        loadSound(Shake, "shake.mp3", 2);
     };
 
+    void loadSound(Sound sound, const QString &filename, int instances = 1) {
+        if (m_players.size() <= sound)
+            m_players.resize(sound + 1);
+        m_players[sound] = new Player(QUrl::fromLocalFile(m_path + "/" + filename), instances, this);
+    }
+
 public slots:
-    void playClick() {
-        m_click_player->play();
-    }
-    void playAbout() {
-        m_about_player->play();
-    }
-
-    void playOuch() {
-        m_ouch_player->play();
-    }
-
-    void playQuit() {
-        m_quit_player->play();
-    }
-
-    void playReturnToGame() {
-        m_returnToGame_player->play();
-    }
-
-    void playReturnToMenu() {
-        m_returnToMenu_player->play();
-    }
-
-    void playShake() {
-        m_shake_player->play();
+    void play(Sound sound) {
+        m_players.at(sound)->play();
     }
 
     void playStartGame() {
-        m_startGame_player->play();
+        play(StartGame);
+    }
+
+    void playClick() {
+        play(Click);
+    }
+
+    void playAbout() {
+        play(About);
+    }
+
+    void playOuch() {
+        play(Ouch);
+    }
+
+    void playQuit() {
+        play(Quit);
+    }
+
+    void playReturnToGame() {
+        play(ReturnToGame);
+    }
+
+    void playReturnToMenu() {
+        play(ReturnToMenu);
     }
 
     void playSquish() {
-        m_squish_player->play();
+        play(Squish);
+    }
+
+    void playShake() {
+        play(Shake);
     }
 
 private:
-    QMediaPlayer *m_click_player;
-    QMediaPlayer *m_about_player;
-    QMediaPlayer *m_ouch_player;
-    QMediaPlayer *m_quit_player;
-    QMediaPlayer *m_returnToGame_player;
-    QMediaPlayer *m_returnToMenu_player;
-    QMediaPlayer *m_shake_player;
-    QMediaPlayer *m_startGame_player;
-    QMediaPlayer *m_squish_player;
+    QVector<Player *> m_players;
 
     QString m_path;
 };
