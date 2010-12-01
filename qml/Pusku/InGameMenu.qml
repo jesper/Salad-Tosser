@@ -69,9 +69,9 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    //menuScreen.opacity = 1
-                    //menuScreen.scale = 1
+                    menuScreen.opacity = 1
                     menuWindow.opacity = 0
+                    menuScreen.state = ""
                 }
             }
         }
