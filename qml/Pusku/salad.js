@@ -1,11 +1,18 @@
 var saladArray = null;
 var componentSaladItem;
 var componentInsectItem;
+var componentScorpionItem;
 var gameStarted = false;
 var nbPieces = 40;
 var nbInsects = 5;
-//var nbInsectsRemaining = 0;
+var nbScorpions = 2;
 
+var scorpionArray = null;
+
+function restartGame() {
+    gameStarted = false;
+    startGame();
+}
 
 function startGame() {
     if (gameStarted) {
@@ -14,20 +21,16 @@ function startGame() {
 
     gameStarted = true;
 
-    //Delete blocks from previous game
-//     for (var i = 0; i < maxIndex; i++) {
-//         if (board[i] != null)
-//             board[i].destroy();
-//     }
-
-     //Calculate board size
-//     maxColumn = Math.floor(background.width / blockSize);
-//     maxRow = Math.floor(background.height / blockSize);
-//     maxIndex = maxRow * maxColumn;
+    var i;
+    if (saladArray != null) {
+        for (i = 0; i < saladArray.length; ++i) {
+            saladArray[i].destroy();
+        }
+    }
 
      //Initialize Board
     saladArray = new Array(nbPieces + nbInsects);
-    var i;
+
 
     for (i = 0; i < nbPieces; ++i) {
         saladArray[i] = createSaladItem();
@@ -36,13 +39,21 @@ function startGame() {
         saladArray[i] = createInsectItem();
     }
 
-//    nbInsectsRemaining = nbInsects;
+    scorpionArray = new Array(nbScorpions);
+
+    for (i = 0; i < nbScorpions; ++i) {
+        scorpionArray[i] = createScorpionItem();
+        saladArray[saladArray.length] = scorpionArray[i];
+    }
+
     insectsCount.numberOfInsectsRemaining = nbInsects;
 
     // Countdown init.
     countdown.sec = 30;
     countdown.min = 0;
-    countdown.timeup = false;
+    countdown.freeze = false;
+
+    health.healthCount = 2;
 }
 
 function createSaladItem() {
@@ -56,14 +67,57 @@ function createSaladItem() {
         return null;
     }
 
-    saladItem.width = Math.random() * 100 + 50;
-    saladItem.height = Math.random() * 100 + 50;
+    var size = Math.random() * 50 + 80;
+
+    saladItem.width = size;
+    saladItem.height = size;
 
     saladItem.x = Math.random() * (gamearea.width - saladItem.width);
     saladItem.y = Math.random() * (gamearea.height - saladItem.height);
     saladItem.z = 2 + Math.random() * (nbPieces + nbInsects);
     saladItem.rotation = Math.random() * 360;
     return saladItem;
+}
+
+function createScorpionItem() {
+    if (componentScorpionItem == null)
+        componentScorpionItem = Qt.createComponent("Scorpion.qml");
+
+    var scorpionItem = componentScorpionItem.createObject(gamearea);
+    if (scorpionItem == null) {
+        console.log("error creating scorpionItem");
+        console.log(componentScorpionItem.errorString());
+        return null;
+    }
+
+    scorpionItem.width = 100;
+    scorpionItem.height = 100;
+    scorpionItem.x = Math.random() * (gamearea.width - scorpionItem.width);
+    scorpionItem.y = Math.random() * (gamearea.height - scorpionItem.height);
+    scorpionItem.z = 2;
+
+    return scorpionItem;
+}
+
+function moveScorpion(scorpionItem) {
+    var new_x;
+    var new_y;
+
+    do {
+        var dir_x = Math.random() - 0.5;
+        var dir_y = Math.random() - 0.5;
+
+        var inv_len = 1 / Math.sqrt(dir_x * dir_x + dir_y * dir_y);
+        dir_x *= inv_len;
+        dir_y *= inv_len;
+
+        new_x = scorpionItem.x + dir_x * 120;
+        new_y = scorpionItem.y + dir_y * 120;
+    } while (new_x < 0 || new_x > (gamearea.width - scorpionItem.width)
+             || new_y < 0 || new_y > (gamearea.height - scorpionItem.height));
+
+    scorpionItem.x = new_x;
+    scorpionItem.y = new_y;
 }
 
 function createInsectItem() {
@@ -88,11 +142,15 @@ function createInsectItem() {
 }
 
 // Shake the salad!
-// It will move leaves and insects, changing their position and depth.
 function shaking(x, y) {
     if (saladArray == null)
         return;
-    for (var i = 0; i < nbPieces + nbInsects; ++i) {
+
+    for (var i = 0; i < scorpionArray.length; ++i) {
+        scorpionArray[i].shake();
+    }
+
+    for (var i = 0; i < saladArray.length; ++i) {
         var new_x = saladArray[i].x + (Math.random() + 0.5) * 6 * x + (Math.random() - 0.5) * 160;
         var new_y = saladArray[i].y + (Math.random() + 0.5) * 6 * y + (Math.random() - 0.5) * 160;
 
@@ -102,7 +160,7 @@ function shaking(x, y) {
             Math.min(gamearea.height - saladArray[i].height, new_y));
 
         if (i < nbPieces) {
-            saladArray[i].rotation = Math.random() * 360;
+            saladArray[i].rotation += Math.random() * 20;
             saladArray[i].state = "shaking";
         }
     }
@@ -111,12 +169,36 @@ function shaking(x, y) {
 // We just killed one insect (yay!).
 // We now need to update the count of remaining insects.
 function insectKilled() {
-//    --nbInsectsRemaining;
     --insectsCount.numberOfInsectsRemaining;
     if (insectsCount.numberOfInsectsRemaining == 0) {
         // We win the game \o/
-        countdown.timeup = true
-        console.log("done")
-        // FIXME
+        gameOver("win");
     }
+}
+
+// We just got bitten by one insect (/o\).
+// We now need to update our health.
+function bittenByInsect() {
+    --health.healthCount;
+    if (health.healthCount == 0) {
+        gameOver("dead");
+    }
+}
+
+// The game is over.
+function gameOver(type) {
+    countdown.freeze = true
+
+    if (type == "win") {
+
+    } else if (type == "timeout") {
+
+    } else if (type == "dead") {
+
+    } else {
+        console.log("Error: unsupported type of game over \"" + type + "\"")
+    }
+
+    gameoverMenu.opacity = 1
+    gameStarted = false;
 }

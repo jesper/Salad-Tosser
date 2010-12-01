@@ -16,6 +16,7 @@ Popup {
             onClicked:  {
                 audio.playClick();
                 menuWindow.opacity = 0;
+                countdown.timeup = false
             }
         }
     }
