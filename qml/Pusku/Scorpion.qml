@@ -14,7 +14,6 @@ Rectangle {
 
         fillMode: Image.PreserveAspectFit
         anchors.fill: parent
-        onProgressChanged: { console.log("foo"); }
     }
 
     Behavior on x {
