@@ -173,16 +173,28 @@ function insectKilled() {
     }
 }
 
+// We just got bitten by one insect (/o\).
+// We now need to update our health.
+function bittenByInsect() {
+    --health.healthCount;
+    if (health.healthCount == 0) {
+        gameOver("dead");
+    }
+}
+
 // The game is over.
 function gameOver(type) {
     countdown.freeze = true
 
     if (type == "win") {
-        console.log("You won the game! Congrats!")
+
     } else if (type == "timeout") {
+
+    } else if (type == "dead") {
 
     } else {
         console.log("Error: unsupported type of game over \"" + type + "\"")
     }
 
+    gameoverMenu.opacity = 1
 }

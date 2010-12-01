@@ -13,6 +13,9 @@ Item {
         opacity: 0
     }
 
+    /*-------------.
+    | Title screen |
+    `-------------*/
     Rectangle {
         id: menuScreen
         color: "#A2EF00"
@@ -88,6 +91,9 @@ Item {
 
     }
 
+    /*-------------.
+    | About screen |
+    `-------------*/
     About {
         id: aboutScreen
         z: menuScreen.z + 1
@@ -99,8 +105,9 @@ Item {
     `-----------------*/
     Rectangle {
         id: gamescreen
-        property int margin: 80
+        property int margin: 80 // Width of the HUD bar.
         anchors.fill:  parent
+        property bool paused: false
 
         /*---------------.
         | Main game area |
@@ -160,6 +167,7 @@ Item {
                     }
                 }
             }
+
             // Insects count.
             Item {
                 id: insectsCount;
@@ -238,7 +246,57 @@ Item {
                     x: 20; y: parent.height - height - 10;
                 }
             }
+
+            // Health
+            Item {
+                id: health
+                anchors.fill:  parent
+
+                property int healthCount: 2
+
+                onHealthCountChanged: {
+                    healthText.text = healthCount
+                }
+
+                Text {
+                    id: healthText
+                    text: parent.healthCount
+                    x: 15
+                    y: parent.height - height - countdownText.height - insectsCountText.height - 30
+                    color: "white"
+                }
+
+                Image {
+                    source: "heart.svg"
+                    sourceSize.height: 30
+                    sourceSize.width: 30
+                    width: 30
+                    height: 30
+                    fillMode: Image.PreserveAspectFit
+                    smooth: true
+                    x: 35
+                    y: parent.height - height - countdownText.height - insectsCountText.height - 30
+                }
+            }
         }
+
+        /*---------------.
+        | Game Over menu |
+        `---------------*/
+        GameOver {
+            id: gameoverMenu
+            opacity: 0
+            z: hud.z + 1
+        }
+
+        states: [
+                 State {
+                     name: "paused"
+                     PropertyChanges {
+                         target: gamescreen; paused: true
+                     }
+                 }
+             ]
     }
 
     function shake(x, y) {

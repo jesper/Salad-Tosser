@@ -30,6 +30,8 @@ Rectangle {
         anchors.fill: parent
         onClicked: {
             scorpion.state = "pushed"
+//            scorpion.state = "triggered"
+            SaladLogic.bittenByInsect();
         }
     }
 
