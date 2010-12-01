@@ -4,7 +4,6 @@ import "salad.js" as SaladLogic
 Rectangle {
     id: scorpion
     color: "transparent"
-    state: "default"
 
     Image {
         source: "scorpion.svg"
@@ -46,17 +45,34 @@ Rectangle {
         id: calmDownTimer
         interval: 4000; running: false; repeat: false
         onTriggered: {
-            scorpion.state = "default";
+            moveTimer.interval = 4000 + 1000 * Math.random();
         }
     }
 
     function shake() {
         if (state != "pushed") {
-            scorpion.state = "default";
-            scorpion.state = "angry";
-            calmDownTimer.stop();
-            calmDownTimer.restart();
+            moveTimer.interval = 500 + 200 * Math.random();
+            shakeAnimation.restart();
         }
+    }
+
+    SequentialAnimation {
+        id: shakeAnimation
+        ScriptAction { script: moveTimer.stop(); }
+        PauseAnimation { duration: 200 }
+        NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
+        NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
+        NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
+        NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
+        NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
+        NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
+        NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
+        NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
+        NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
+        NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
+        NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
+        NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
+        ScriptAction { script: { moveTimer.restart(); calmDownTimer.restart(); } }
     }
 
     states: [
@@ -64,14 +80,6 @@ Rectangle {
             name: "pushed";
             PropertyChanges { target: scorpion; opacity: 0 }
             PropertyChanges { target: scorpion; scale: 2 }
-        },
-        State {
-            name: "default";
-            PropertyChanges { target: moveTimer; interval: 4000 + 1000 * Math.random(); }
-        },
-        State {
-            name: "angry";
-            PropertyChanges { target: moveTimer; interval: 500 + 200 * Math.random(); }
         }
     ]
 
@@ -82,25 +90,6 @@ Rectangle {
             SequentialAnimation {
                 NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; duration: 300 }
                 NumberAnimation { target: scorpion; property: "opacity"; duration: 400 }
-            }
-        },
-        Transition {
-            from: "default"
-            to: "angry"
-            SequentialAnimation {
-                PauseAnimation { duration: 200 }
-                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
-                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
-                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
-                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
-                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
-                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
-                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
-                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
-                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
-                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
-                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.2; duration: 50 }
-                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 50 }
             }
         }
     ]
