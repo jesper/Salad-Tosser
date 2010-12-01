@@ -17,11 +17,11 @@ Rectangle {
 
     Behavior on x {
          enabled: true;
-         NumberAnimation {easing.type: Easing.OutInQuad}
+         NumberAnimation {easing.type: Easing.OutInQuad; duration: 100}
      }
     Behavior on y {
          enabled: true;
-         NumberAnimation {easing.type: Easing.OutInQuad}
+         NumberAnimation {easing.type: Easing.OutInQuad; duration: 100}
      }
 
     MouseArea {

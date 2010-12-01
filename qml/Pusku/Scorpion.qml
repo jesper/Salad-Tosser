@@ -15,14 +15,16 @@ Rectangle {
         anchors.fill: parent
     }
 
+    property real moveDuration: 100;
+
     Behavior on x {
          enabled: true;
-         NumberAnimation {easing.type: Easing.OutInQuad; duration: 200}
+         NumberAnimation {easing.type: Easing.OutInQuad; duration: scorpion.moveDuration}
      }
 
     Behavior on y {
          enabled: true;
-         NumberAnimation {easing.type: Easing.OutInQuad; duration: 200}
+         NumberAnimation {easing.type: Easing.OutInQuad; duration: scorpion.moveDuration}
      }
 
     MouseArea {
@@ -39,6 +41,7 @@ Rectangle {
         id: moveTimer
         interval: 4000 + 1000 * Math.random(); running: true; repeat: true
         onTriggered: {
+            scorpion.moveDuration = 250;
             SaladLogic.moveScorpion(parent);
         }
     }
@@ -53,6 +56,7 @@ Rectangle {
 
     function shake() {
         if (state != "pushed") {
+            scorpion.moveDuration = 100;
             moveTimer.interval = 500 + 200 * Math.random();
             shakeAnimation.restart();
         }
