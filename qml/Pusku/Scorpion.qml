@@ -55,6 +55,7 @@ Rectangle {
         if (state != "pushed") {
             scorpion.state = "default";
             scorpion.state = "angry";
+            calmDownTimer.stop();
             calmDownTimer.restart();
         }
     }
