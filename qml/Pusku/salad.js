@@ -206,7 +206,7 @@ function gameOver(type) {
     } else if (type == "timeout") {
 
     } else if (type == "dead") {
-
+        gameoverMenu.source = "scorpion.svg"
     } else {
         console.log("Error: unsupported type of game over \"" + type + "\"")
     }
