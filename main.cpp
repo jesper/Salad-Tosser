@@ -44,7 +44,6 @@ int main(int argc, char *argv[])
 
 // *Horrible hack* to get the path of the sound files (same location as qml files)
     Audio audio(QFileInfo(viewer.source().toLocalFile()).absoluteDir().path());
-    audio.playClick();
 
     viewer.rootContext()->setContextProperty("audio", &audio);
     viewer.setViewport(new QGLWidget);
