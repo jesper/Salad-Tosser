@@ -214,6 +214,10 @@ Item {
                                     // Time up!
                                     parent.sec = 0
                                     parent.timeup = true;
+                                    if (insectsCount.numberOfInsectsRemaining > 0) {
+                                        // We have lost! :(
+                                        // FIXME
+                                    }
                                 }
                             }
                         }

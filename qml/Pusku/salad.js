@@ -4,7 +4,7 @@ var componentInsectItem;
 var gameStarted = false;
 var nbPieces = 40;
 var nbInsects = 5;
-var nbInsectsRemaining = 0;
+//var nbInsectsRemaining = 0;
 
 
 function startGame() {
@@ -36,8 +36,8 @@ function startGame() {
         saladArray[i] = createInsectItem();
     }
 
-    nbInsectsRemaining = nbInsects;
-    insectsCount.numberOfInsectsRemaining = nbInsectsRemaining;
+//    nbInsectsRemaining = nbInsects;
+    insectsCount.numberOfInsectsRemaining = nbInsects;
 
     // Countdown init.
     countdown.sec = 30;
@@ -108,17 +108,15 @@ function shaking(x, y) {
     }
 }
 
-function getNbInsectRemaining() {
-    return nbInsectsRemaining.toString();
-}
-
 // We just killed one insect (yay!).
 // We now need to update the count of remaining insects.
 function insectKilled() {
-    --nbInsectsRemaining;
+//    --nbInsectsRemaining;
     --insectsCount.numberOfInsectsRemaining;
-    if (nbInsectsRemaining == 0) {
+    if (insectsCount.numberOfInsectsRemaining == 0) {
         // We win the game \o/
+        countdown.timeup = true
+        console.log("done")
         // FIXME
     }
 }
