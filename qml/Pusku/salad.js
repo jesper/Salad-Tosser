@@ -9,6 +9,11 @@ var nbScorpions = 2;
 
 var scorpionArray = null;
 
+function restartGame() {
+    gameStarted = false;
+    startGame();
+}
+
 function startGame() {
     if (gameStarted) {
         return;
@@ -26,10 +31,16 @@ function startGame() {
 //     maxColumn = Math.floor(background.width / blockSize);
 //     maxRow = Math.floor(background.height / blockSize);
 //     maxIndex = maxRow * maxColumn;
+    var i;
+    if (saladArray != null) {
+        for (i = 0; i < saladArray.length; ++i) {
+            saladArray[i].destroy();
+        }
+    }
 
      //Initialize Board
     saladArray = new Array(nbPieces + nbInsects);
-    var i;
+
 
     for (i = 0; i < nbPieces; ++i) {
         saladArray[i] = createSaladItem();
@@ -143,6 +154,11 @@ function createInsectItem() {
 function shaking(x, y) {
     if (saladArray == null)
         return;
+
+    for (var i = 0; i < scorpionArray.length; ++i) {
+        scorpionArray[i].shake();
+    }
+
     for (var i = 0; i < saladArray.length; ++i) {
         var new_x = saladArray[i].x + (Math.random() + 0.5) * 6 * x + (Math.random() - 0.5) * 160;
         var new_y = saladArray[i].y + (Math.random() + 0.5) * 6 * y + (Math.random() - 0.5) * 160;
@@ -156,10 +172,6 @@ function shaking(x, y) {
             saladArray[i].rotation += Math.random() * 20;
             saladArray[i].state = "shaking";
         }
-    }
-
-    for (var i = 0; i < scorpionArray.length; ++i) {
-        scorpionArray[i].shake();
     }
 }
 
@@ -197,4 +209,5 @@ function gameOver(type) {
     }
 
     gameoverMenu.opacity = 1
+    gameStarted = false;
 }

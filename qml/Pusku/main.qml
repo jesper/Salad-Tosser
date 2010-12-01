@@ -35,7 +35,7 @@ Item {
             MouseArea {
                 anchors.fill:  parent
                 onClicked: {
-                    SaladLogic.startGame();
+                    SaladLogic.restartGame();
                     menuScreen.state = "hidden";
                     gamearea.opacity = 1
                 }
