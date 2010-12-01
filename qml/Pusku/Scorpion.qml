@@ -3,6 +3,7 @@ import Qt 4.7
 Rectangle {
     id: scorpion
     color: "transparent"
+    property bool bitten: false
 
     Image {
         source: "scorpion.svg"
@@ -30,9 +31,11 @@ Rectangle {
         id: mouseArea
         anchors.fill: parent
         onClicked: {
-            scorpion.state = "pushed"
-//            scorpion.state = "triggered"
-            main.bittenByInsect();
+            if (!bitten) {
+                bitten = true;
+                scorpion.state = "pushed"
+                main.bittenByInsect();
+            }
         }
     }
 
