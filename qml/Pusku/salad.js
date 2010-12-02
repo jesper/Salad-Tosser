@@ -24,8 +24,6 @@ function levelUp() {
     gameStarted = false;
 
     levelUpAnimation.restart();
-
-    startGame();
 }
 
 function startGame() {
@@ -89,6 +87,9 @@ function createSaladItem() {
     saladItem.y = Math.random() * (gamearea.height - saladItem.height);
     saladItem.z = 2 + Math.random() * (nbPieces + nbInsects);
     saladItem.rotation = Math.random() * 360;
+
+    saladItem.placed = true;
+
     return saladItem;
 }
 
@@ -108,6 +109,8 @@ function createScorpionItem() {
     scorpionItem.x = Math.random() * (gamearea.width - scorpionItem.width);
     scorpionItem.y = Math.random() * (gamearea.height - scorpionItem.height);
     scorpionItem.z = 2;
+
+    scorpionItem.placed = true;
 
     return scorpionItem;
 }
@@ -152,6 +155,8 @@ function createInsectItem() {
     insectItem.x = Math.random() * (gamearea.width - insectItem.width);
     insectItem.y = Math.random() * (gamearea.height - insectItem.height);
     insectItem.z = 1;
+
+    insectItem.placed = true;
 
     return insectItem;
 }

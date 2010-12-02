@@ -1,8 +1,7 @@
 import Qt 4.7
 
-Rectangle {
+Entity {
     id: scorpion
-    color: "transparent"
     property bool bitten: false
 
     Image {
@@ -18,12 +17,12 @@ Rectangle {
     property real moveDuration: 100;
 
     Behavior on x {
-         enabled: true;
+         enabled: scorpion.placed;
          NumberAnimation {easing.type: Easing.OutInQuad; duration: scorpion.moveDuration}
      }
 
     Behavior on y {
-         enabled: true;
+         enabled: scorpion.placed;
          NumberAnimation {easing.type: Easing.OutInQuad; duration: scorpion.moveDuration}
      }
 

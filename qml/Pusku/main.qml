@@ -312,14 +312,14 @@ Item {
             SequentialAnimation {
                 id: levelUpAnimation
                 ParallelAnimation {
-                    NumberAnimation { target: levelUp; property: "opacity"; easing.type: Easing.OutInQuad; to: 1; duration: 200 }
-                    NumberAnimation { target: levelUp; property: "scale"; easing.type: Easing.OutInQuad; to: 1; duration: 200 }
+                    NumberAnimation { target: levelUp; property: "opacity"; easing.type: Easing.OutInQuad; to: 1; duration: 400 }
+                    NumberAnimation { target: levelUp; property: "scale"; easing.type: Easing.OutInQuad; to: 1; duration: 400 }
                 }
 
-                PauseAnimation { duration: 1000 }
+                PauseAnimation { duration: 1600 }
 
                 NumberAnimation { target: levelUp; property: "opacity"; easing.type: Easing.OutInQuad; to: 0; duration: 200 }
-                ScriptAction { script: levelUp.scale = 0.5; }
+                ScriptAction { script: { levelUp.scale = 0.5; SaladLogic.startGame(); } }
             }
         }
 
