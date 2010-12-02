@@ -237,10 +237,8 @@ function gameOver(type) {
     gameoverMenu.highScoreText =
         high < scoreBox.score ? "New high!" : "High: " + highText;
 
-    if (type == "win") {
-
-    } else if (type == "timeout") {
-
+    if (type == "timeout") {
+        gameoverMenu.source = "alarm.svg"
     } else if (type == "dead") {
         gameoverMenu.source = "scorpion.svg"
     } else {

@@ -11,8 +11,8 @@ Popup {
 
     Image {
         source: parent.source
-        width: parent.width * 0.6
-        height: parent.width * 0.6
+        width: parent.width * 0.4
+        height: parent.width * 0.4
         anchors.centerIn: parent
         fillMode: Image.PreserveAspectFit
     }
