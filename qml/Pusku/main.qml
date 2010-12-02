@@ -389,7 +389,7 @@ Item {
                 text: "Good job!"
                 anchors.bottom: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: "white"
+                color: "#803963"
             }
 
             Text {
@@ -397,7 +397,7 @@ Item {
                 text: "Prepare for level " + gamescreen.level
                 anchors.top: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: "white"
+                color: "#803963"
             }
 
             MouseArea {
@@ -466,7 +466,10 @@ Item {
             loops: Animation.Infinite;
 
             ScriptAction { script: audio.playTheme(); }
-            PauseAnimation { duration: 11000 }
+            PauseAnimation { duration: 3000 }
+            PauseAnimation { duration: 3000 }
+            PauseAnimation { duration: 3000 }
+            PauseAnimation { duration: 2000 }
         }
     }
 }
