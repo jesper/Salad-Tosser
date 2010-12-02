@@ -37,6 +37,7 @@ Item {
 
             MouseArea {
                 anchors.fill:  parent
+                enabled: !gamescreen.running
                 onClicked: {
                     audio.playStartGame();
                     SaladLogic.restartGame();
