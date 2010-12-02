@@ -128,7 +128,8 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    SaladLogic.shaking(0, 0);
+                    if (!accelerometer.isEnabled())
+                        SaladLogic.shaking(0, 0);
                 }
             }
 

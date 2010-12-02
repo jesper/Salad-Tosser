@@ -12,6 +12,7 @@ public:
 
 public slots:
     void checkReading();
+    bool isEnabled();
 
 signals:
     void shake(QVariant x, QVariant y);

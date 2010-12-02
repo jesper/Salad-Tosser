@@ -31,6 +31,11 @@ void Accelerometer::checkReading()
         emit shake(-reading->x(), reading->y());
 }
 
+bool Accelerometer::isEnabled()
+{
+    return m_accelerometer->isConnectedToBackend() && m_accelerometer->isActive();
+}
+
 int main(int argc, char *argv[])
 {
     QApplication::setGraphicsSystem("raster");
@@ -46,6 +51,7 @@ int main(int argc, char *argv[])
     Audio audio(QFileInfo(viewer.source().toLocalFile()).absoluteDir().path());
 
     viewer.rootContext()->setContextProperty("audio", &audio);
+    viewer.rootContext()->setContextProperty("accelerometer", &accelerometer);
     viewer.setViewport(new QGLWidget);
     viewer.showFullScreen();
 
