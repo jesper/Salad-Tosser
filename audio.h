@@ -60,7 +60,7 @@ public:
         loadSound(ReturnToGame, "returntogame.mp3");
         loadSound(ReturnToMenu, "returntomenu.mp3");
         loadSound(Squish, "squish.mp3", 2);
-        loadSound(Shake, "shake.mp3", 2);
+        loadSound(Shake, "shake.mp3", 1);
     };
 
     void loadSound(Sound sound, const QString &filename, int instances = 1) {
