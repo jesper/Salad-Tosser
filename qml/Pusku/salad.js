@@ -235,7 +235,7 @@ function gameOver(type) {
     highText += high;
 
     gameoverMenu.highScoreText =
-        high < scoreBox.score ? "New high!" : "Old high: " + highText;
+        high < scoreBox.score ? "New high!" : "High: " + highText;
 
     if (type == "win") {
 
