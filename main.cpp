@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     Accelerometer accelerometer;
 
     LoadScreen loadScreen;
-    loadScreen.setItemsToLoadCount(13);
+    loadScreen.setItemsToLoadCount(17);
 
     loadScreen.showFullScreen();
     loadScreen.repaint();
