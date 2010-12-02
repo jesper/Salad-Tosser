@@ -30,7 +30,10 @@ Entity {
         id: mouseArea
         enabled: gamescreen.running
         anchors.fill: parent
-        anchors.margins: 10
+        anchors.leftMargin: 26
+        anchors.rightMargin: 8
+        anchors.topMargin: 26
+        anchors.bottomMargin: 8
         onClicked: {
             if (!bitten) {
                 bitten = true;
