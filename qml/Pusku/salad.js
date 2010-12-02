@@ -22,6 +22,9 @@ function levelUp() {
     nbScorpions += 1;
 
     gameStarted = false;
+
+    levelUpAnimation.restart();
+
     startGame();
 }
 

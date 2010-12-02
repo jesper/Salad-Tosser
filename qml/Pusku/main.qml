@@ -293,6 +293,36 @@ Item {
             z: hud.z + 1
         }
 
+        Popup {
+            id: levelUp
+
+            width: parent.width / 3
+            height: parent.height / 4
+
+            anchors.centerIn: parent
+            opacity: 0
+            scale: 0.5
+
+            Text {
+                text: "Level up!"
+                anchors.centerIn: parent
+                color: "white"
+            }
+
+            SequentialAnimation {
+                id: levelUpAnimation
+                ParallelAnimation {
+                    NumberAnimation { target: levelUp; property: "opacity"; easing.type: Easing.OutInQuad; to: 1; duration: 200 }
+                    NumberAnimation { target: levelUp; property: "scale"; easing.type: Easing.OutInQuad; to: 1; duration: 200 }
+                }
+
+                PauseAnimation { duration: 1000 }
+
+                NumberAnimation { target: levelUp; property: "opacity"; easing.type: Easing.OutInQuad; to: 0; duration: 200 }
+                ScriptAction { script: levelUp.scale = 0.5; }
+            }
+        }
+
         states: [
                  State {
                      name: "paused"
