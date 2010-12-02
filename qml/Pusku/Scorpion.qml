@@ -43,7 +43,8 @@ Entity {
         interval: 4000 + 1000 * Math.random(); running: true; repeat: true
         onTriggered: {
             scorpion.moveDuration = 250;
-            main.moveScorpion(parent);
+            if (gamescreen.running)
+                main.moveScorpion(parent);
         }
     }
 

@@ -16,7 +16,8 @@ Popup {
             onClicked:  {
                 audio.playReturnToGame();
                 menuWindow.opacity = 0;
-                countdown.timeup = false
+                countdown.freeze = false
+                gamescreen.running = true
             }
         }
     }

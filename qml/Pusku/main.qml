@@ -113,6 +113,7 @@ Item {
         property int level: 1
         anchors.fill:  parent
         property bool paused: false
+        property bool running: false
 
         /*---------------.
         | Main game area |
@@ -169,6 +170,7 @@ Item {
                     onClicked: {
                         inGameMenu.opacity = 1
                         countdown.freeze = true
+                        gamescreen.running = false
                     }
                 }
             }
@@ -217,7 +219,7 @@ Item {
                 Timer {
                     interval: 1000; running: true; repeat: true
                     onTriggered: {
-                        if (!parent.freeze) {
+                        if (gamescreen.running && !parent.freeze) {
                             --parent.sec;
                             if (parent.sec == -1) {
                                 if (parent.min != 0) {

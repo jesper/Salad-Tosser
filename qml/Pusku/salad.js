@@ -26,6 +26,7 @@ function levelUp() {
     gamescreen.level++;
 
     gameStarted = false;
+    gamescreen.running = false;
 
     levelUpAnimation.restart();
 }
@@ -34,6 +35,10 @@ function startGame() {
     if (gameStarted) {
         return;
     }
+
+    countdownText.text = "0:30"
+
+    gamescreen.running = true;
 
     gameStarted = true;
 
@@ -168,7 +173,7 @@ function createInsectItem() {
 // Shake the salad!
 function shaking(x, y) {
     audio.playShake();
-    if (saladArray == null)
+    if (saladArray == null || !gamescreen.running)
         return;
 
     for (var i = 0; i < scorpionArray.length; ++i) {
@@ -217,6 +222,8 @@ function bittenByInsect() {
 // The game is over.
 function gameOver(type) {
     countdown.freeze = true
+
+    gamescreen.running = false;
 
     if (type == "win") {
 
