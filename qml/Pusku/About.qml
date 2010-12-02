@@ -48,7 +48,6 @@ Rectangle {
             anchors.fill:  parent
             onClicked: {
                 about.opacity = 0
-
             }
         }
 

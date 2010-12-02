@@ -6,6 +6,8 @@ Item {
     width: 800
     height: 480
 
+    id: main
+
     InGameMenu {
         id: inGameMenu
         z: menuScreen.z + 1
@@ -35,6 +37,7 @@ Item {
             MouseArea {
                 anchors.fill:  parent
                 onClicked: {
+                    audio.playStartGame();
                     SaladLogic.restartGame();
                     menuScreen.state = "hidden";
                     gamearea.opacity = 1
@@ -83,6 +86,7 @@ Item {
             MouseArea {
                 anchors.fill:  parent
                 onClicked: {
+                    audio.playAbout();
                     aboutScreen.opacity = 1
                 }
             }
@@ -106,8 +110,10 @@ Item {
     Rectangle {
         id: gamescreen
         property int margin: 80 // Width of the HUD bar.
+        property int level: 1
         anchors.fill:  parent
         property bool paused: false
+        property bool running: false
 
         /*---------------.
         | Main game area |
@@ -122,8 +128,25 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    SaladLogic.shaking(0, 0);
+                    if (!accelerometer.isEnabled())
+                        SaladLogic.shaking(0, 0);
                 }
+            }
+
+            Rectangle {
+                id: fader
+                color: "black"
+
+                Behavior on opacity {
+                    enabled: true
+                    NumberAnimation {easing.type: Easing.OutInQuad; duration: 200}
+                }
+
+                opacity: gamescreen.running ? 0 : 0.75
+
+                z: 1000
+
+                anchors.fill: parent
             }
         }
 
@@ -164,6 +187,7 @@ Item {
                     onClicked: {
                         inGameMenu.opacity = 1
                         countdown.freeze = true
+                        gamescreen.running = false
                     }
                 }
             }
@@ -204,15 +228,15 @@ Item {
                 id: countdown
                 anchors.fill: parent
 
-                property int sec;
-                property int min;
+                property int sec : 30;
+                property int min : 0;
                 property string secString;
                 property bool freeze: true;
 
                 Timer {
                     interval: 1000; running: true; repeat: true
                     onTriggered: {
-                        if (!parent.freeze) {
+                        if (gamescreen.running && !parent.freeze) {
                             --parent.sec;
                             if (parent.sec == -1) {
                                 if (parent.min != 0) {
@@ -242,8 +266,18 @@ Item {
 
                 Text {
                     id: countdownText
-                    color: "white"
+                    color: countdown.sec < 10 ? "red" : "white"
                     x: 20; y: parent.height - height - 10;
+                    smooth: true
+
+                    SequentialAnimation {
+                        running: gamescreen.running && countdown.sec < 10;
+                        loops: Animation.Infinite;
+                        alwaysRunToEnd: true
+
+                        NumberAnimation { target: countdownText; property: "scale"; easing.type: Easing.OutInQuad; to: 1.5; duration: 500 }
+                        NumberAnimation { target: countdownText; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 500 }
+                    }
                 }
             }
 
@@ -278,6 +312,34 @@ Item {
                     y: parent.height - height - countdownText.height - insectsCountText.height - 30
                 }
             }
+
+            // Score
+            Item {
+                id: scoreBox
+                anchors.fill:  parent
+
+                property int score: 0
+                onScoreChanged: {
+                    if (score < 0)
+                        score = 0;
+
+                    scoreText.text = ""
+                    if (score < 100)
+                        scoreText.text += "0"
+                    if (score < 10)
+                        scoreText.text += "0"
+
+                    scoreText.text += score
+                }
+
+                Text {
+                    id: scoreText
+                    text: "000"
+                    x: 20
+                    y: parent.height - height - countdownText.height - insectsCountText.height - healthText.height - 35
+                    color: "white"
+                }
+            }
         }
 
         /*---------------.
@@ -287,6 +349,57 @@ Item {
             id: gameoverMenu
             opacity: 0
             z: hud.z + 1
+        }
+
+        Popup {
+            id: levelUp
+
+            property bool active: false
+
+            width: parent.width / 2
+            height: parent.height / 3
+
+            anchors.centerIn: parent
+            opacity: 0
+            scale: 0.5
+
+            Text {
+                font.pointSize: 24
+                text: "Good job!"
+                anchors.bottom: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: "white"
+            }
+
+            Text {
+                font.pointSize: 24
+                text: "Prepare for level " + gamescreen.level
+                anchors.top: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: "white"
+            }
+
+            MouseArea {
+                enabled: levelUp.active
+                anchors.fill: parent
+                onClicked: {
+                    goToNextLevelAnimation.restart();
+                }
+            }
+
+            SequentialAnimation {
+                id: levelUpAnimation
+                ParallelAnimation {
+                    NumberAnimation { target: levelUp; property: "opacity"; easing.type: Easing.OutInQuad; to: 1; duration: 400 }
+                    NumberAnimation { target: levelUp; property: "scale"; easing.type: Easing.OutInQuad; to: 1; duration: 400 }
+                }
+                ScriptAction { script: levelUp.active = true; }
+            }
+            SequentialAnimation {
+                id: goToNextLevelAnimation
+                NumberAnimation { target: levelUp; property: "opacity"; easing.type: Easing.OutInQuad; to: 0; duration: 200 }
+                ScriptAction { script: { levelUp.active = false; levelUp.scale = 0.5; SaladLogic.startGame(); } }
+            }
         }
 
         states: [
@@ -301,5 +414,17 @@ Item {
 
     function shake(x, y) {
         SaladLogic.shaking(x, y);
+    }
+
+    function insectKilled() {
+        SaladLogic.insectKilled();
+    }
+
+    function bittenByInsect() {
+        SaladLogic.bittenByInsect();
+    }
+
+    function moveScorpion(scorpioni) {
+        SaladLogic.moveScorpion(scorpioni);
     }
 }

@@ -1,9 +1,8 @@
 import Qt 4.7
-import "salad.js" as SaladLogic
 
-Rectangle {
+Entity {
     id: scorpion
-    color: "transparent"
+    property bool bitten: false
 
     Image {
         source: "scorpion.svg"
@@ -18,22 +17,26 @@ Rectangle {
     property real moveDuration: 100;
 
     Behavior on x {
-         enabled: true;
+         enabled: scorpion.placed;
          NumberAnimation {easing.type: Easing.OutInQuad; duration: scorpion.moveDuration}
      }
 
     Behavior on y {
-         enabled: true;
+         enabled: scorpion.placed;
          NumberAnimation {easing.type: Easing.OutInQuad; duration: scorpion.moveDuration}
      }
 
     MouseArea {
         id: mouseArea
+        enabled: gamescreen.running
         anchors.fill: parent
+        anchors.margins: 10
         onClicked: {
-            scorpion.state = "pushed"
-//            scorpion.state = "triggered"
-            SaladLogic.bittenByInsect();
+            if (!bitten) {
+                bitten = true;
+                scorpion.state = "pushed"
+                main.bittenByInsect();
+            }
         }
     }
 
@@ -42,7 +45,8 @@ Rectangle {
         interval: 4000 + 1000 * Math.random(); running: true; repeat: true
         onTriggered: {
             scorpion.moveDuration = 250;
-            SaladLogic.moveScorpion(parent);
+            if (gamescreen.running)
+                main.moveScorpion(parent);
         }
     }
 

@@ -1,45 +1,42 @@
 import Qt 4.7
-import "salad.js" as SaladLogic
 
-Rectangle {
+Entity {
     id:insect
-    color: "transparent"
     property bool killed: false
+
+    signal destroyed;
 
     Image {
         source: "insect.svg"
-        sourceSize.height: 40
-        sourceSize.width: 40
+        sourceSize.height: 75
+        sourceSize.width: 75
         fillMode: Image.PreserveAspectFit
         anchors.fill: parent
         smooth: true
     }
 
     Behavior on x {
-         enabled: true;
+         enabled: insect.placed;
          NumberAnimation {easing.type: Easing.OutInQuad; duration: 100}
      }
     Behavior on y {
-         enabled: true;
+         enabled: insect.placed;
          NumberAnimation {easing.type: Easing.OutInQuad; duration: 100}
      }
 
     MouseArea {
         id: mouseArea
+        enabled: gamescreen.running
         anchors.fill: parent
+        anchors.margins: -15
         onClicked: {
             if (!killed) {
                 killed = true
                 insect.state = "dead"
-                SaladLogic.insectKilled();
+                main.insectKilled();
             }
         }
     }
-
-//    GestureArea {
-//        anchors.fill: parent
-//        onPan: {console.log("pan gesture")}
-//    }
 
     states: State {
         name: "dead";

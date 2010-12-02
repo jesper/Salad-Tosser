@@ -1,23 +1,48 @@
 var saladArray = null;
-var componentSaladItem;
-var componentInsectItem;
-var componentScorpionItem;
+var componentSaladItem = null;
+var componentInsectItem = null;
+var componentScorpionItem = null;
 var gameStarted = false;
-var nbPieces = 40;
+var nbPieces = 15;
 var nbInsects = 5;
 var nbScorpions = 2;
 
 var scorpionArray = null;
 
 function restartGame() {
+    nbPieces = 15;
+    nbScorpions = 2;
+
     gameStarted = false;
+    gamescreen.level = 1;
+    scoreBox.score = 0;
     startGame();
+}
+
+function levelUp() {
+    nbPieces += 4;
+    nbScorpions += 1;
+
+    gamescreen.level++;
+
+    gameStarted = false;
+    gamescreen.running = false;
+
+    levelUpAnimation.restart();
 }
 
 function startGame() {
     if (gameStarted) {
         return;
     }
+
+    // Countdown init.
+    countdown.sec = 30;
+    countdown.min = 0;
+    countdown.freeze = false;
+    countdownText.text = "0:30"
+
+    gamescreen.running = true;
 
     gameStarted = true;
 
@@ -30,7 +55,6 @@ function startGame() {
 
      //Initialize Board
     saladArray = new Array(nbPieces + nbInsects);
-
 
     for (i = 0; i < nbPieces; ++i) {
         saladArray[i] = createSaladItem();
@@ -48,11 +72,6 @@ function startGame() {
 
     insectsCount.numberOfInsectsRemaining = nbInsects;
 
-    // Countdown init.
-    countdown.sec = 30;
-    countdown.min = 0;
-    countdown.freeze = false;
-
     health.healthCount = 2;
 }
 
@@ -67,7 +86,7 @@ function createSaladItem() {
         return null;
     }
 
-    var size = Math.random() * 50 + 80;
+    var size = Math.random() * 30 + 110;
 
     saladItem.width = size;
     saladItem.height = size;
@@ -76,6 +95,9 @@ function createSaladItem() {
     saladItem.y = Math.random() * (gamearea.height - saladItem.height);
     saladItem.z = 2 + Math.random() * (nbPieces + nbInsects);
     saladItem.rotation = Math.random() * 360;
+
+    saladItem.placed = true;
+
     return saladItem;
 }
 
@@ -90,11 +112,13 @@ function createScorpionItem() {
         return null;
     }
 
-    scorpionItem.width = 100;
-    scorpionItem.height = 100;
+    scorpionItem.width = 140;
+    scorpionItem.height = 140;
     scorpionItem.x = Math.random() * (gamearea.width - scorpionItem.width);
     scorpionItem.y = Math.random() * (gamearea.height - scorpionItem.height);
     scorpionItem.z = 2;
+
+    scorpionItem.placed = true;
 
     return scorpionItem;
 }
@@ -131,20 +155,26 @@ function createInsectItem() {
         return null;
     }
 
-    insectItem.width = Math.random() * 30 + 40;
-    insectItem.height = Math.random() * 30 + 40;
+    var size = 75;
+
+    insectItem.width = size;
+    insectItem.height = size;
 
     insectItem.x = Math.random() * (gamearea.width - insectItem.width);
     insectItem.y = Math.random() * (gamearea.height - insectItem.height);
     insectItem.z = 1;
+
+    insectItem.placed = true;
 
     return insectItem;
 }
 
 // Shake the salad!
 function shaking(x, y) {
-    if (saladArray == null)
+    if (saladArray == null || !gamescreen.running)
         return;
+
+    audio.playShake();
 
     for (var i = 0; i < scorpionArray.length; ++i) {
         scorpionArray[i].shake();
@@ -169,17 +199,21 @@ function shaking(x, y) {
 // We just killed one insect (yay!).
 // We now need to update the count of remaining insects.
 function insectKilled() {
+    audio.playSquish();
     --insectsCount.numberOfInsectsRemaining;
+    scoreBox.score += 1;
     if (insectsCount.numberOfInsectsRemaining == 0) {
-        // We win the game \o/
-        gameOver("win");
+        // next level!
+        levelUp();
     }
 }
 
 // We just got bitten by one insect (/o\).
 // We now need to update our health.
 function bittenByInsect() {
+    audio.playOuch();
     --health.healthCount;
+    scoreBox.score -= 2;
     if (health.healthCount == 0) {
         gameOver("dead");
     }
@@ -189,12 +223,14 @@ function bittenByInsect() {
 function gameOver(type) {
     countdown.freeze = true
 
+    gamescreen.running = false;
+
     if (type == "win") {
 
     } else if (type == "timeout") {
 
     } else if (type == "dead") {
-
+        gameoverMenu.source = "scorpion.svg"
     } else {
         console.log("Error: unsupported type of game over \"" + type + "\"")
     }

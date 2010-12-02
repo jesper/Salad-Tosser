@@ -4,7 +4,9 @@
 #include <QtOpenGL/QGLWidget>
 #include <QtDeclarative/QDeclarativeContext>
 #include <QDir>
+#include <QLayout>
 
+#include "loadscreen.h"
 #include "qmlapplicationviewer.h"
 #include "accelerometer.h"
 #include "audio.h"
@@ -31,26 +33,52 @@ void Accelerometer::checkReading()
         emit shake(-reading->x(), reading->y());
 }
 
+bool Accelerometer::isEnabled()
+{
+    return m_accelerometer->isConnectedToBackend() && m_accelerometer->isActive();
+}
+
 int main(int argc, char *argv[])
 {
     QApplication::setGraphicsSystem("raster");
     QApplication app(argc, argv);
+    app.setStyle("plastique"); //Looks better than native style in many cases
 
     Accelerometer accelerometer;
 
+    LoadScreen loadScreen;
+    loadScreen.setItemsToLoadCount(13);
+
+    loadScreen.showFullScreen();
+    loadScreen.repaint();
+
+    app.processEvents();
+
     QmlApplicationViewer viewer;
+    loadScreen.itemLoaded("Next-Gen Graphics Engine");
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationLockLandscape);
+
+    loadScreen.itemLoaded("Salad Logic");
     viewer.setMainQmlFile(QLatin1String("qml/Pusku/main.qml"));
 
-// *Horrible hack* to get the path of the sound files (same location as qml files)
+    loadScreen.itemLoaded("Cinematic Quality Audio");
+    // *Horrible hack* to get the path of the sound files (same location as qml files)
     Audio audio(QFileInfo(viewer.source().toLocalFile()).absoluteDir().path());
+    QObject::connect(&audio, SIGNAL(loaded(QString)), &loadScreen, SLOT(itemLoaded(QString)));
+    audio.startLoadingSounds();
 
     viewer.rootContext()->setContextProperty("audio", &audio);
+    viewer.rootContext()->setContextProperty("accelerometer", &accelerometer);
+
+    loadScreen.itemLoaded("Enabling bling");
     viewer.setViewport(new QGLWidget);
-    viewer.showFullScreen();
+
 
     QObject::connect(&accelerometer, SIGNAL(shake(QVariant, QVariant)),
                      viewer.rootObject(), SLOT(shake(QVariant, QVariant)));
 
+
+    viewer.showFullScreen();
+    loadScreen.hide();
     return app.exec();
 }

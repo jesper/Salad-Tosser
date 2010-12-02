@@ -5,6 +5,16 @@ Popup {
     height: parent.height * 0.8
     anchors.centerIn: parent
 
+    property string source;
+
+    Image {
+        source: parent.source
+        width: parent.width * 0.6
+        height: parent.width * 0.6
+        anchors.centerIn: parent
+        fillMode: Image.PreserveAspectFit
+    }
+
     PopupButton {
         id: mainScreenButton
         x: (parent.width/4) * 1 - width/2
