@@ -15,6 +15,7 @@ function restartGame() {
 
     gameStarted = false;
     gamescreen.level = 1;
+    scoreBox.score = 0;
     startGame();
 }
 
@@ -195,6 +196,7 @@ function shaking(x, y) {
 function insectKilled() {
     audio.playSquish();
     --insectsCount.numberOfInsectsRemaining;
+    scoreBox.score += 1;
     if (insectsCount.numberOfInsectsRemaining == 0) {
         // next level!
         levelUp();
@@ -206,6 +208,7 @@ function insectKilled() {
 function bittenByInsect() {
     audio.playOuch();
     --health.healthCount;
+    scoreBox.score -= 2;
     if (health.healthCount == 0) {
         gameOver("dead");
     }

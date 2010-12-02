@@ -283,6 +283,34 @@ Item {
                     y: parent.height - height - countdownText.height - insectsCountText.height - 30
                 }
             }
+
+            // Score
+            Item {
+                id: scoreBox
+                anchors.fill:  parent
+
+                property int score: 0
+                onScoreChanged: {
+                    if (score < 0)
+                        score = 0;
+
+                    scoreText.text = ""
+                    if (score < 100)
+                        scoreText.text += "0"
+                    if (score < 10)
+                        scoreText.text += "0"
+
+                    scoreText.text += score
+                }
+
+                Text {
+                    id: scoreText
+                    text: "000"
+                    x: 20
+                    y: parent.height - height - countdownText.height - insectsCountText.height - healthText.height - 35
+                    color: "white"
+                }
+            }
         }
 
         /*---------------.
