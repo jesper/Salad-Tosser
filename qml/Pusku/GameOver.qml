@@ -8,6 +8,7 @@ Popup {
     property string source;
     property string finalScoreText;
     property string highScoreText;
+    property string scoreColor: "#803963";
 
     Image {
         source: parent.source
@@ -15,13 +16,15 @@ Popup {
         height: parent.width * 0.4
         anchors.centerIn: parent
         fillMode: Image.PreserveAspectFit
+        opacity: 0.3
     }
 
     Text {
         id: scorePlaceholder
         text: "Score:"
+        font.bold: true
         font.pointSize: 24.0
-        color: "#E567B1"
+        color: parent.scoreColor
 
         anchors.horizontalCenter: parent.horizontalCenter
         y: 20
@@ -33,7 +36,7 @@ Popup {
         text: parent.finalScoreText
         font.bold: true
         font.pointSize: 64.0
-        color: "#E567B1"
+        color: parent.scoreColor
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: scorePlaceholder.bottom
@@ -44,8 +47,8 @@ Popup {
 
         text: parent.highScoreText
         font.bold: true
-        font.pointSize: 64.0
-        color: "#E567B1"
+        font.pointSize: 24.0
+        color: parent.scoreColor
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: finalScore.bottom
@@ -63,8 +66,6 @@ Popup {
             onClicked: {
                 menuScreen.opacity = 1
                 parent.parent.opacity = 0
-                // Reset game state
-                // FIXME
                 menuScreen.state = ""
             }
         }
