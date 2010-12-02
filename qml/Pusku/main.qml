@@ -459,9 +459,14 @@ Item {
     }
 
     SequentialAnimation {
+        id: themeAnimation;
         running: gamescreen.running;
-        loops: Animation.Infinite;
-        ScriptAction { script: audio.playTheme(); }
-        PauseAnimation { duration: 1500 }
+        PauseAnimation { duration: 2500; }
+        SequentialAnimation {
+            loops: Animation.Infinite;
+
+            ScriptAction { script: audio.playTheme(); }
+            PauseAnimation { duration: 11000 }
+        }
     }
 }
