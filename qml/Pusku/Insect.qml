@@ -26,6 +26,7 @@ Entity {
 
     MouseArea {
         id: mouseArea
+        enabled: gamescreen.running
         anchors.fill: parent
         anchors.margins: -15
         onClicked: {
