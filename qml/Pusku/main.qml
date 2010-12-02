@@ -228,8 +228,8 @@ Item {
                 id: countdown
                 anchors.fill: parent
 
-                property int sec;
-                property int min;
+                property int sec : 30;
+                property int min : 0;
                 property string secString;
                 property bool freeze: true;
 
@@ -266,8 +266,18 @@ Item {
 
                 Text {
                     id: countdownText
-                    color: "white"
+                    color: countdown.sec < 10 ? "red" : "white"
                     x: 20; y: parent.height - height - 10;
+                    smooth: true
+
+                    SequentialAnimation {
+                        running: gamescreen.running && countdown.sec < 10;
+                        loops: Animation.Infinite;
+                        alwaysRunToEnd: true
+
+                        NumberAnimation { target: countdownText; property: "scale"; easing.type: Easing.OutInQuad; to: 1.5; duration: 500 }
+                        NumberAnimation { target: countdownText; property: "scale"; easing.type: Easing.OutInQuad; to: 1.0; duration: 500 }
+                    }
                 }
             }
 
