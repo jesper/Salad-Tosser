@@ -296,6 +296,8 @@ Item {
         Popup {
             id: levelUp
 
+            property bool active: false
+
             width: parent.width / 3
             height: parent.height / 4
 
@@ -309,17 +311,26 @@ Item {
                 color: "white"
             }
 
+            MouseArea {
+                enabled: levelUp.active
+                anchors.fill: parent
+                onClicked: {
+                    goToNextLevelAnimation.restart();
+                }
+            }
+
             SequentialAnimation {
                 id: levelUpAnimation
                 ParallelAnimation {
                     NumberAnimation { target: levelUp; property: "opacity"; easing.type: Easing.OutInQuad; to: 1; duration: 400 }
                     NumberAnimation { target: levelUp; property: "scale"; easing.type: Easing.OutInQuad; to: 1; duration: 400 }
                 }
-
-                PauseAnimation { duration: 1600 }
-
+                ScriptAction { script: levelUp.active = true; }
+            }
+            SequentialAnimation {
+                id: goToNextLevelAnimation
                 NumberAnimation { target: levelUp; property: "opacity"; easing.type: Easing.OutInQuad; to: 0; duration: 200 }
-                ScriptAction { script: { levelUp.scale = 0.5; SaladLogic.startGame(); } }
+                ScriptAction { script: { levelUp.active = false; levelUp.scale = 0.5; SaladLogic.startGame(); } }
             }
         }
 
