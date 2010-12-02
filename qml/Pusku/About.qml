@@ -5,6 +5,10 @@ Rectangle {
     color: "#A2EF00"
     anchors.fill:  parent
 
+    MouseArea {
+        anchors.fill: parent
+    }
+
     Text {
         id: instructionsText
         y: 20
