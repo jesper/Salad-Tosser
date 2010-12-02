@@ -385,6 +385,7 @@ Item {
             scale: 0.5
 
             Text {
+                id: timeBonusText
                 font.pointSize: 24
                 text: "Good job!"
                 anchors.bottom: parent.verticalCenter

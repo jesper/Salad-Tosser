@@ -25,6 +25,14 @@ function levelUp() {
 
     gamescreen.level++;
 
+    var timeBonus = Math.floor((countdown.sec-1) / 5);
+
+    if (timeBonus >= 1) {
+        timeBonusText.text = "Good job, time bonus: " + timeBonus + "!";
+    } else {
+        timeBonusText.text = "Phew, close call!";
+    }
+
     gameStarted = false;
     gamescreen.running = false;
 
