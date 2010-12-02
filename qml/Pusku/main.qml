@@ -266,6 +266,7 @@ Item {
                     onTriggered: {
                         if (gamescreen.running && !parent.freeze && !gamescreen.timerPaused) {
                             --parent.sec;
+
                             if (parent.sec == -1) {
                                 if (parent.min != 0) {
                                     --parent.min
@@ -280,6 +281,8 @@ Item {
 
                                     }
                                 }
+                            } else if (parent.sec <= 5) {
+                                audio.playBeep();
                             }
                         }
 
@@ -289,12 +292,12 @@ Item {
 
                 Text {
                     id: countdownText
-                    color: countdown.sec < 10 ? "red" : "white"
+                    color: countdown.sec <= 5 ? "red" : "white"
                     x: 20; y: parent.height - height - 10;
                     smooth: true
 
                     SequentialAnimation {
-                        running: gamescreen.running && countdown.sec < 10;
+                        running: gamescreen.running && countdown.sec <= 5;
                         loops: Animation.Infinite;
                         alwaysRunToEnd: true
 

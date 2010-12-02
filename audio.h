@@ -49,7 +49,8 @@ class Audio : public QObject {
         Theme,
         LevelUp,
         Death,
-        Arite
+        Arite,
+        Beep
     };
 
 public:
@@ -61,43 +62,46 @@ public:
 
     void startLoadingSounds() {
         loadSound(StartGame, "startgame.mp3");
-        emit loaded("sound file you'll hear once");
+        emit loaded("Sound file you'll hear once");
 
         loadSound(Click, "click.mp3");
-        emit loaded("don't think we even use this sound file anymore");
+        emit loaded("Don't think we even use this sound file anymore");
 
         loadSound(About, "about.mp3");
-        emit loaded("sammi made this sound");
+        emit loaded("Sammi made this sound");
 
         loadSound(Ouch, "ouch.mp3");
-        emit loaded("this is what happens when you touch a scorpion!");
+        emit loaded("This is what happens when you touch a scorpion!");
 
         loadSound(Quit, "quit.mp3");
-        emit loaded("let's hope you never hear this sound");
+        emit loaded("Let's hope you never hear this sound");
 
         loadSound(ReturnToGame, "returntogame.mp3");
-        emit loaded("'fab'ulous sound file!");
+        emit loaded("'Fab'ulous sound file!");
 
         loadSound(ReturnToMenu, "returntomenu.mp3");
-        emit loaded("most likely true sound file");
+        emit loaded("Most likely true sound file");
 
         loadSound(Squish, "squish.mp3", 3);
-        emit loaded("best sound file in the game");
+        emit loaded("Best sound file in the game");
 
         loadSound(Shake, "shake.mp3");
         emit loaded("Jefe's dancing style");
 
         loadSound(LevelUp, "levelup.mp3");
-        emit loaded("fab sounding like the koolaid guy");
+        emit loaded("Fab sounding like the koolaid guy");
 
         loadSound(Death, "death.mp3");
         emit loaded("Jefe style trombone");
 
         loadSound(Theme, "theme.mp3");
-        emit loaded("Best theme song ever, worth the wait.");
+        emit loaded("Best theme song ever, worth the wait");
 
         loadSound(Arite, "arite.mp3");
         emit loaded("Giggidi");
+
+        loadSound(Beep, "beep.mp3");
+        emit loaded("You'll hate hearing this sound");
 
     }
 
@@ -156,6 +160,10 @@ public slots:
 
     void playArite() {
         play(Arite);
+    }
+
+    void playBeep() {
+        play(Beep);
     }
 
 signals:
