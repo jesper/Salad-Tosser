@@ -448,4 +448,11 @@ Item {
     function moveScorpion(scorpioni) {
         SaladLogic.moveScorpion(scorpioni);
     }
+
+    SequentialAnimation {
+        id: quitAnimation
+        ScriptAction { script: audio.playQuit(); }
+        PauseAnimation { duration: 500 }
+        ScriptAction { script: Qt.quit(); }
+    }
 }

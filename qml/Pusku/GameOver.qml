@@ -79,8 +79,7 @@ Popup {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                audio.playQuit();
-                Qt.quit()
+                quitAnimation.start();
             }
         }
     }
