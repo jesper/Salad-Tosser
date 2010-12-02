@@ -225,6 +225,10 @@ function gameOver(type) {
 
     gamescreen.running = false;
 
+    var high = updateHighScore();
+
+    console.log("game over, score: " + scoreBox.score + ", high: " + high);
+
     if (type == "win") {
 
     } else if (type == "timeout") {
@@ -237,4 +241,31 @@ function gameOver(type) {
 
     gameoverMenu.opacity = 1
     gameStarted = false;
+}
+
+function updateHighScore(score) {
+    var db = openDatabaseSync("SaladTossHighScore", "1.0", "Salad Tosser Highscore", 100);
+
+    var high = 0;
+    db.transaction(
+        function(tx) {
+            // Create the database if it doesn't already exist
+            tx.executeSql('CREATE TABLE IF NOT EXISTS Scores(score INTEGER)');
+
+            var result = tx.executeSql('SELECT * FROM Scores ORDER BY score DESC').rows;
+            if (result.length != 0)
+                high = result.item(0).score;
+
+            if (high == undefined || high == null)
+                high = 0;
+
+            // Insert new high
+            if (scoreBox.score > high) {
+                tx.executeSql('DELETE FROM Scores');
+                tx.executeSql('INSERT INTO Scores VALUES(?)', [ scoreBox.score ]);
+            }
+        }
+    )
+
+    return high;
 }
