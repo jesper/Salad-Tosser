@@ -172,9 +172,10 @@ function createInsectItem() {
 
 // Shake the salad!
 function shaking(x, y) {
-    audio.playShake();
     if (saladArray == null || !gamescreen.running)
         return;
+
+    audio.playShake();
 
     for (var i = 0; i < scorpionArray.length; ++i) {
         scorpionArray[i].shake();
