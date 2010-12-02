@@ -350,7 +350,7 @@ Item {
 
                     scoreText.text += score
 
-                    gameoverMenu.finalScoreText = scoreText.text
+                    gameoverMenu.finalScoreText = score
                 }
 
                 Text {

@@ -227,18 +227,14 @@ function gameOver(type) {
 
     var high = updateHighScore();
 
-    var highText = "";
-    if (high < 100)
-        highText += "0"
-    if (high < 10)
-        highText += "0"
-    highText += high;
+    var highText = high;
 
     gameoverMenu.highScoreText =
         high < scoreBox.score ? "New high!" : "High: " + highText;
 
     if (type == "timeout") {
         gameoverMenu.source = "alarm.svg"
+        console.log("game over, score: " + scoreBox.score + ", high: " + high);
     } else if (type == "dead") {
         gameoverMenu.source = "scorpion.svg"
     } else {
