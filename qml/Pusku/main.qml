@@ -15,6 +15,7 @@ Item {
         opacity: 0
     }
 
+
     /*-------------.
     | Title screen |
     `-------------*/
@@ -92,6 +93,23 @@ Item {
             }
 
         }
+
+        HelperBee {
+            id:bee
+            height: parent.height/6
+            width: parent.width/6
+            fillMode: Image.PreserveAspectFit
+            z: menuScreen.z + 1
+            y: parent.height - height
+            x: parent.width + width
+
+            PropertyAnimation on x {
+                running:!gamescreen.running; from: (main.width + bee.width); to: 0-width; duration: 10000; loops: Animation.Infinite
+            }
+
+        }
+
+
 
     }
 
@@ -406,13 +424,13 @@ Item {
         }
 
         states: [
-                 State {
-                     name: "paused"
-                     PropertyChanges {
-                         target: gamescreen; paused: true
-                     }
-                 }
-             ]
+            State {
+                name: "paused"
+                PropertyChanges {
+                    target: gamescreen; paused: true
+                }
+            }
+        ]
     }
 
     function shake(x, y) {
