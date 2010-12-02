@@ -26,15 +26,13 @@ Entity {
 
     MouseArea {
         id: mouseArea
-        enabled: gamescreen.running
+        enabled: gamescreen.running && !insect.killed
         anchors.fill: parent
         anchors.margins: -15
         onClicked: {
-            if (!killed) {
-                killed = true
-                insect.state = "dead"
-                main.insectKilled();
-            }
+            killed = true
+            insect.state = "dead"
+            main.insectKilled();
         }
     }
 
