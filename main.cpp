@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
 {
     QApplication::setGraphicsSystem("raster");
     QApplication app(argc, argv);
+    app.setStyle("plastique"); //Looks better than native style in many cases
 
     Accelerometer accelerometer;
 
