@@ -6,6 +6,11 @@ Item {
     width: parent.width/2
     height: parent.height/2
 
+    Behavior on opacity {
+        enabled: true
+        NumberAnimation {easing.type: Easing.OutInQuad; duration: 400}
+    }
+
     Rectangle {
         id:popupShadow
         color: "black"
