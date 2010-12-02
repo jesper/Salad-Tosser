@@ -110,6 +110,7 @@ Item {
     Rectangle {
         id: gamescreen
         property int margin: 80 // Width of the HUD bar.
+        property int level: 1
         anchors.fill:  parent
         property bool paused: false
 
@@ -298,16 +299,25 @@ Item {
 
             property bool active: false
 
-            width: parent.width / 3
-            height: parent.height / 4
+            width: parent.width / 2
+            height: parent.height / 3
 
             anchors.centerIn: parent
             opacity: 0
             scale: 0.5
 
             Text {
-                text: "Level up!"
-                anchors.centerIn: parent
+                id: topText
+                text: "Good job!"
+                anchors.bottom: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: "white"
+            }
+
+            Text {
+                text: "Prepare for level " + gamescreen.level
+                anchors.top: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
                 color: "white"
             }
 

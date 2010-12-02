@@ -14,12 +14,15 @@ function restartGame() {
     nbScorpions = 2;
 
     gameStarted = false;
+    gamescreen.level = 1;
     startGame();
 }
 
 function levelUp() {
     nbPieces += 4;
     nbScorpions += 1;
+
+    gamescreen.level++;
 
     gameStarted = false;
 
