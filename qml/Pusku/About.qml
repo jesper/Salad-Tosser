@@ -5,6 +5,10 @@ Rectangle {
     color: "#A2EF00"
     anchors.fill:  parent
 
+    MouseArea {
+        anchors.fill: parent
+    }
+
     Text {
         id: instructionsText
         y: 20
@@ -14,7 +18,6 @@ Rectangle {
         font.bold: true
         font.pointSize: 28
         color: "#CB0077"
-
     }
 
     Text {
