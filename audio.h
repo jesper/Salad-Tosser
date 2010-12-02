@@ -45,7 +45,11 @@ class Audio : public QObject {
         ReturnToMenu,
         Squish,
         Shake,
-        NumSounds
+        NumSounds,
+        Theme,
+        LevelUp,
+        Death,
+        Arite
     };
 
 public:
@@ -82,6 +86,18 @@ public:
 
         loadSound(Shake, "shake.mp3");
         emit loaded("Jefe's dancing style");
+
+        loadSound(LevelUp, "levelup.mp3");
+        emit loaded("fab sounding like the koolaid guy");
+
+        loadSound(Death, "death.mp3");
+        emit loaded("Jefe style trombone");
+
+        loadSound(Theme, "theme.mp3");
+        emit loaded("Best theme song ever, worth the wait.");
+
+        loadSound(Arite, "arite.mp3");
+        emit loaded("Giggidi");
 
     }
 
@@ -124,6 +140,22 @@ public slots:
 
     void playShake() {
         play(Shake);
+    }
+
+    void playDeath() {
+        play(Death);
+    }
+
+    void playLevelUp() {
+        play(LevelUp);
+    }
+
+    void playTheme() {
+        play(Theme);
+    }
+
+    void playArite() {
+        play(Arite);
     }
 
 signals:

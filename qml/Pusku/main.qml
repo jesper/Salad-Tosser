@@ -410,6 +410,7 @@ Item {
 
             SequentialAnimation {
                 id: levelUpAnimation
+                ScriptAction { script: audio.playLevelUp(); }
                 ParallelAnimation {
                     NumberAnimation { target: levelUp; property: "opacity"; easing.type: Easing.OutInQuad; to: 1; duration: 400 }
                     NumberAnimation { target: levelUp; property: "scale"; easing.type: Easing.OutInQuad; to: 1; duration: 400 }
@@ -418,6 +419,7 @@ Item {
             }
             SequentialAnimation {
                 id: goToNextLevelAnimation
+                ScriptAction { script: audio.playArite(); }
                 NumberAnimation { target: levelUp; property: "opacity"; easing.type: Easing.OutInQuad; to: 0; duration: 200 }
                 ScriptAction { script: { levelUp.active = false; levelUp.scale = 0.5; SaladLogic.startGame(); } }
             }
@@ -454,5 +456,12 @@ Item {
         ScriptAction { script: audio.playQuit(); }
         PauseAnimation { duration: 500 }
         ScriptAction { script: Qt.quit(); }
+    }
+
+    SequentialAnimation {
+        running: gamescreen.running;
+        loops: Animation.Infinite;
+        ScriptAction { script: audio.playTheme(); }
+        PauseAnimation { duration: 1500 }
     }
 }

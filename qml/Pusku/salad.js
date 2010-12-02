@@ -221,6 +221,7 @@ function bittenByInsect() {
 
 // The game is over.
 function gameOver(type) {
+    audio.playDeath();
     countdown.freeze = true
 
     gamescreen.running = false;
