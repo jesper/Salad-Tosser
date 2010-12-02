@@ -184,6 +184,7 @@ Item {
 
                 MouseArea {
                     anchors.fill: parent
+                    enabled: gamescreen.running
                     onClicked: {
                         inGameMenu.opacity = 1
                         countdown.freeze = true
