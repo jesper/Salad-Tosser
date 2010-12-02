@@ -21,8 +21,8 @@ Entity {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
+        anchors.margins: 15
         drag.target: parent;
-
     }
 
     Behavior on rotation {

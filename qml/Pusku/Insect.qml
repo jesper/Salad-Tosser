@@ -27,6 +27,7 @@ Entity {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
+        anchors.margins: -15
         onClicked: {
             if (!killed) {
                 killed = true
@@ -35,11 +36,6 @@ Entity {
             }
         }
     }
-
-//    GestureArea {
-//        anchors.fill: parent
-//        onPan: {console.log("pan gesture")}
-//    }
 
     states: State {
         name: "dead";
