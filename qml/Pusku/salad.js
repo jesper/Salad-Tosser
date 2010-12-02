@@ -2,6 +2,7 @@ var saladArray = null;
 var componentSaladItem = null;
 var componentInsectItem = null;
 var componentScorpionItem = null;
+var componentTimeBonus = null;
 var gameStarted = false;
 var nbPieces = 15;
 var nbInsects = 5;
@@ -45,10 +46,10 @@ function startGame() {
     }
 
     // Countdown init.
-    countdown.sec = 30;
+    countdown.sec = 20;
     countdown.min = 0;
     countdown.freeze = false;
-    countdownText.text = "0:30"
+    countdownText.text = "0:20"
 
     gamescreen.running = true;
 
@@ -210,6 +211,9 @@ function insectKilled() {
     audio.playSquish();
     --insectsCount.numberOfInsectsRemaining;
     scoreBox.score += 1;
+
+    createTimeBonus();
+
     if (insectsCount.numberOfInsectsRemaining == 0) {
         // next level!
         levelUp();
@@ -279,4 +283,44 @@ function updateHighScore(score) {
     )
 
     return high;
+}
+
+function updateTimerString() {
+    if (countdown.sec > 9) {
+        countdown.secString = countdown.sec
+    } else {
+        countdown.secString = "0" + countdown.sec
+    }
+    countdownText.text = countdown.min + ":" + countdown.secString
+}
+
+var timeBonusCount = 0;
+
+var lastBonus = null;
+
+function createTimeBonus() {
+    if (componentTimeBonus == null)
+        componentTimeBonus = Qt.createComponent("TimeBonus.qml");
+
+    var timeBonus = componentTimeBonus.createObject(gamescreen);
+    if (timeBonus == null) {
+        console.log("error creating timeBonus");
+        console.log(componentTimeBonus.errorString());
+        return null;
+    }
+
+    ++timeBonusCount;
+    gamescreen.timerPaused = true;
+
+    lastBonus = timeBonus;
+
+    timeBonus.startAnimation();
+}
+
+function destroyTimeBonus(timeBonus)
+{
+    --timeBonusCount;
+    if (timeBonusCount == 0)
+        gamescreen.timerPaused = false;
+    timeBonus.destroy();
 }

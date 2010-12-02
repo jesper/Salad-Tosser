@@ -139,6 +139,7 @@ Item {
         anchors.fill:  parent
         property bool paused: false
         property bool running: false
+        property bool timerPaused: false
 
         /*---------------.
         | Main game area |
@@ -254,7 +255,7 @@ Item {
                 id: countdown
                 anchors.fill: parent
 
-                property int sec : 30;
+                property int sec : 20;
                 property int min : 0;
                 property string secString;
                 property bool freeze: true;
@@ -262,7 +263,7 @@ Item {
                 Timer {
                     interval: 1000; running: true; repeat: true
                     onTriggered: {
-                        if (gamescreen.running && !parent.freeze) {
+                        if (gamescreen.running && !parent.freeze && !gamescreen.timerPaused) {
                             --parent.sec;
                             if (parent.sec == -1) {
                                 if (parent.min != 0) {
@@ -281,12 +282,7 @@ Item {
                             }
                         }
 
-                        if (parent.sec > 9) {
-                            parent.secString = parent.sec
-                        } else {
-                            parent.secString = "0" + parent.sec
-                        }
-                        countdownText.text = parent.min + ":" + parent.secString
+                        SaladLogic.updateTimerString();
                     }
                 }
 
@@ -457,6 +453,15 @@ Item {
 
     function moveScorpion(scorpioni) {
         SaladLogic.moveScorpion(scorpioni);
+    }
+
+    function destroyTimeBonus(timeBonus) {
+        SaladLogic.destroyTimeBonus(timeBonus);
+    }
+
+    function increaseTimer() {
+        countdown.sec++;
+        SaladLogic.updateTimerString();
     }
 
     SequentialAnimation {
