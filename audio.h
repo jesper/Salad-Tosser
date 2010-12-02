@@ -77,10 +77,10 @@ public:
         loadSound(ReturnToMenu, "returntomenu.mp3");
         emit loaded("most likely true sound file");
 
-        loadSound(Squish, "squish.mp3", 2);
+        loadSound(Squish, "squish.mp3", 3);
         emit loaded("best sound file in the game");
 
-        loadSound(Shake, "shake.mp3", 1);
+        loadSound(Shake, "shake.mp3");
         emit loaded("Jefe's dancing style");
 
     }
