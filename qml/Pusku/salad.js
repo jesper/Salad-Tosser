@@ -36,6 +36,10 @@ function startGame() {
         return;
     }
 
+    // Countdown init.
+    countdown.sec = 30;
+    countdown.min = 0;
+    countdown.freeze = false;
     countdownText.text = "0:30"
 
     gamescreen.running = true;
@@ -67,11 +71,6 @@ function startGame() {
     }
 
     insectsCount.numberOfInsectsRemaining = nbInsects;
-
-    // Countdown init.
-    countdown.sec = 30;
-    countdown.min = 0;
-    countdown.freeze = false;
 
     health.healthCount = 2;
 }
