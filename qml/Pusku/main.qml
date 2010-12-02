@@ -330,6 +330,8 @@ Item {
                         scoreText.text += "0"
 
                     scoreText.text += score
+
+                    gameoverMenu.finalScoreText = scoreText.text
                 }
 
                 Text {

@@ -6,6 +6,7 @@ Popup {
     anchors.centerIn: parent
 
     property string source;
+    property string finalScoreText;
 
     Image {
         source: parent.source
@@ -15,10 +16,32 @@ Popup {
         fillMode: Image.PreserveAspectFit
     }
 
+    Text {
+        id: scorePlaceholder
+        text: "Score:"
+        font.pointSize: 24.0
+        color: "#E567B1"
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: 20
+    }
+
+    Text {
+        id: finalScore
+
+        text: parent.finalScoreText
+        font.bold: true
+        font.pointSize: 78.0
+        color: "#E567B1"
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: scorePlaceholder.bottom
+    }
+
     PopupButton {
         id: mainScreenButton
         x: (parent.width/4) * 1 - width/2
-        y: (parent.height/4) * 3 - height/4
+        y: parent.height - height * 1.5
         buttonText: "Main Screen"
 
         MouseArea {
@@ -37,7 +60,7 @@ Popup {
         id: quitButton
         buttonText: "Quit"
         x: (parent.width/4) * 3 - width/2
-        y: (parent.height/4) * 3 - height/4
+        y: parent.height - height * 1.5
 
         MouseArea {
             anchors.fill: parent
