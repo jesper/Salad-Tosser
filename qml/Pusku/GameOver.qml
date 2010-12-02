@@ -7,6 +7,7 @@ Popup {
 
     property string source;
     property string finalScoreText;
+    property string highScoreText;
 
     Image {
         source: parent.source
@@ -31,12 +32,25 @@ Popup {
 
         text: parent.finalScoreText
         font.bold: true
-        font.pointSize: 78.0
+        font.pointSize: 64.0
         color: "#E567B1"
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: scorePlaceholder.bottom
     }
+
+    Text {
+        id: highScore
+
+        text: parent.highScoreText
+        font.bold: true
+        font.pointSize: 64.0
+        color: "#E567B1"
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: finalScore.bottom
+    }
+
 
     PopupButton {
         id: mainScreenButton

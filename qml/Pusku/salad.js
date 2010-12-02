@@ -227,7 +227,15 @@ function gameOver(type) {
 
     var high = updateHighScore();
 
-    console.log("game over, score: " + scoreBox.score + ", high: " + high);
+    var highText = "";
+    if (high < 100)
+        highText += "0"
+    if (high < 10)
+        highText += "0"
+    highText += high;
+
+    gameoverMenu.highScoreText =
+        high < scoreBox.score ? "New high!" : "Old high: " + highText;
 
     if (type == "win") {
 
