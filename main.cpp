@@ -4,7 +4,9 @@
 #include <QtOpenGL/QGLWidget>
 #include <QtDeclarative/QDeclarativeContext>
 #include <QDir>
+#include <QLayout>
 
+#include "loadscreen.h"
 #include "qmlapplicationviewer.h"
 #include "accelerometer.h"
 #include "audio.h"
@@ -43,20 +45,38 @@ int main(int argc, char *argv[])
 
     Accelerometer accelerometer;
 
+    LoadScreen loadScreen;
+    loadScreen.setItemsToLoadCount(4);
+
+    loadScreen.showFullScreen();
+    loadScreen.repaint();
+
+    app.processEvents();
+
     QmlApplicationViewer viewer;
+    loadScreen.itemLoaded("Next-Gen Graphics Engine");
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationLockLandscape);
+
+    loadScreen.itemLoaded("Salad Logic");
     viewer.setMainQmlFile(QLatin1String("qml/Pusku/main.qml"));
 
 // *Horrible hack* to get the path of the sound files (same location as qml files)
+    loadScreen.itemLoaded("Cinematic Quality Audio");
     Audio audio(QFileInfo(viewer.source().toLocalFile()).absoluteDir().path());
+
 
     viewer.rootContext()->setContextProperty("audio", &audio);
     viewer.rootContext()->setContextProperty("accelerometer", &accelerometer);
+
+    loadScreen.itemLoaded("Enabling bling");
     viewer.setViewport(new QGLWidget);
-    viewer.showFullScreen();
+
 
     QObject::connect(&accelerometer, SIGNAL(shake(QVariant, QVariant)),
                      viewer.rootObject(), SLOT(shake(QVariant, QVariant)));
 
+
+    viewer.showFullScreen();
+    loadScreen.hide();
     return app.exec();
 }
