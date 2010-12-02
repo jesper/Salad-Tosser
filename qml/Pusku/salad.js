@@ -105,6 +105,8 @@ function createSaladItem() {
     saladItem.z = 2 + Math.random() * (nbPieces + nbInsects);
     saladItem.rotation = Math.random() * 360;
 
+    saladItem.shakeFactor = 1.0;
+
     saladItem.placed = true;
 
     return saladItem;
@@ -126,6 +128,8 @@ function createScorpionItem() {
     scorpionItem.x = Math.random() * (gamearea.width - scorpionItem.width);
     scorpionItem.y = Math.random() * (gamearea.height - scorpionItem.height);
     scorpionItem.z = 2;
+
+    scorpionItem.shakeFactor = 0.8;
 
     scorpionItem.placed = true;
 
@@ -173,6 +177,8 @@ function createInsectItem() {
     insectItem.y = Math.random() * (gamearea.height - insectItem.height);
     insectItem.z = 1;
 
+    insectItem.shakeFactor = 0.9;
+
     insectItem.placed = true;
 
     return insectItem;
@@ -190,8 +196,8 @@ function shaking(x, y) {
     }
 
     for (var i = 0; i < saladArray.length; ++i) {
-        var new_x = saladArray[i].x + (Math.random() + 0.5) * 6 * x + (Math.random() - 0.5) * 160;
-        var new_y = saladArray[i].y + (Math.random() + 0.5) * 6 * y + (Math.random() - 0.5) * 160;
+        var new_x = saladArray[i].x + saladArray[i].shakeFactor * ((Math.random() + 0.5) * 6 * x + (Math.random() - 0.5) * 160);
+        var new_y = saladArray[i].y + saladArray[i].shakeFactor * ((Math.random() + 0.5) * 6 * y + (Math.random() - 0.5) * 160);
 
         saladArray[i].x = Math.max(0,
             Math.min(gamearea.width - saladArray[i].width, new_x));
