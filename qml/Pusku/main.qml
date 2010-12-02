@@ -307,7 +307,7 @@ Item {
             scale: 0.5
 
             Text {
-                id: topText
+                font.pointSize: 24
                 text: "Good job!"
                 anchors.bottom: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -315,6 +315,7 @@ Item {
             }
 
             Text {
+                font.pointSize: 24
                 text: "Prepare for level " + gamescreen.level
                 anchors.top: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
