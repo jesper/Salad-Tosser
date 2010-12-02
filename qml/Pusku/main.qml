@@ -63,13 +63,20 @@ Item {
             }
         ]
 
+        CloseButton {
+            MouseArea {
+                anchors.fill:  parent
+                onClicked: {
+                    quitAnimation.start();
+                }
+            }
+        }
 
         Rectangle {
             id: aboutButton
             color: "#CBF76F"
             width: 75
             height: 75
-            x: parent.width - width
             opacity: 0
             radius:10
 

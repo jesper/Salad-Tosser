@@ -5,10 +5,6 @@ Rectangle {
     color: "#A2EF00"
     anchors.fill:  parent
 
-    MouseArea {
-        anchors.fill: parent
-    }
-
     Text {
         id: instructionsText
         y: 20
@@ -18,6 +14,7 @@ Rectangle {
         font.bold: true
         font.pointSize: 28
         color: "#CB0077"
+
     }
 
     Text {
@@ -29,31 +26,13 @@ Rectangle {
         font.italic: true
     }
 
-    Rectangle {
-        id: closeButton
-        color: "#CBF76F"
-        width: 75
-        height: 75
-        x: parent.width - width
-        opacity: 1
-        radius:10
-
-        Text {
-            id:aboutText
-            anchors.centerIn:  parent
-            text: "X"
-            font.pointSize: 60
-            font.bold: true
-            color: "#E567B1"
-        }
-
+    CloseButton {
         MouseArea {
             anchors.fill:  parent
             onClicked: {
                 about.opacity = 0
             }
         }
-
     }
 
     Image {
