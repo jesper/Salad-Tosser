@@ -53,6 +53,11 @@ Rectangle {
             y: parent.height
             x: parent.width/2 - width/2
         }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: { audio.playLevelUp(); }
+        }
     }
 
     Image {
@@ -69,6 +74,11 @@ Rectangle {
             y: parent.height
             x: parent.width/2 - width/2
         }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: { audio.playAbout(); }
+        }
     }
 
     Image {
@@ -84,6 +94,11 @@ Rectangle {
             text: "Jesper"
             y: parent.height
             x: parent.width/2 - width/2
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: { audio.playArite(); }
         }
     }
 
