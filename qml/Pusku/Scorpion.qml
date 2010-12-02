@@ -29,6 +29,7 @@ Entity {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
+        anchors.margins: 10
         onClicked: {
             if (!bitten) {
                 bitten = true;
