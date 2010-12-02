@@ -131,6 +131,22 @@ Item {
                     SaladLogic.shaking(0, 0);
                 }
             }
+
+            Rectangle {
+                id: fader
+                color: "black"
+
+                Behavior on opacity {
+                    enabled: true
+                    NumberAnimation {easing.type: Easing.OutInQuad; duration: 200}
+                }
+
+                opacity: gamescreen.running ? 0 : 0.75
+
+                z: 1000
+
+                anchors.fill: parent
+            }
         }
 
         /*--------.

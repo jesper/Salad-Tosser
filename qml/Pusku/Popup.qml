@@ -8,7 +8,7 @@ Item {
 
     Behavior on opacity {
         enabled: true
-        NumberAnimation {easing.type: Easing.OutInQuad; duration: 400}
+        NumberAnimation {easing.type: Easing.OutInQuad; duration: 200}
     }
 
     Rectangle {
