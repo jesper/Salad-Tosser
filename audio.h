@@ -52,21 +52,37 @@ public:
     Audio(QString path) {
         m_path = path;
 
-        loadSound(StartGame, "startgame.mp3");
-        loadSound(Click, "click.mp3");
-        loadSound(About, "about.mp3");
-        loadSound(Ouch, "ouch.mp3");
-        loadSound(Quit, "quit.mp3");
-        loadSound(ReturnToGame, "returntogame.mp3");
-        loadSound(ReturnToMenu, "returntomenu.mp3");
-        loadSound(Squish, "squish.mp3", 2);
-        loadSound(Shake, "shake.mp3", 1);
-    };
 
-    void loadSound(Sound sound, const QString &filename, int instances = 1) {
-        if (m_players.size() <= sound)
-            m_players.resize(sound + 1);
-        m_players[sound] = new Player(QUrl::fromLocalFile(m_path + "/" + filename), instances, this);
+    }
+
+    void startLoadingSounds() {
+        loadSound(StartGame, "startgame.mp3");
+        emit loaded("sound file you'll hear once");
+
+        loadSound(Click, "click.mp3");
+        emit loaded("don't think we even use this sound file anymore");
+
+        loadSound(About, "about.mp3");
+        emit loaded("sammi made this sound");
+
+        loadSound(Ouch, "ouch.mp3");
+        emit loaded("this is what happens when you touch a scorpion!");
+
+        loadSound(Quit, "quit.mp3");
+        emit loaded("let's hope you never hear this sound");
+
+        loadSound(ReturnToGame, "returntogame.mp3");
+        emit loaded("'fab'ulous sound file!");
+
+        loadSound(ReturnToMenu, "returntomenu.mp3");
+        emit loaded("most likely true sound file");
+
+        loadSound(Squish, "squish.mp3", 2);
+        emit loaded("best sound file in the game");
+
+        loadSound(Shake, "shake.mp3", 1);
+        emit loaded("Jefe's dancing style");
+
     }
 
 public slots:
@@ -110,7 +126,16 @@ public slots:
         play(Shake);
     }
 
+signals:
+    void loaded(QString file);
+
 private:
+    void loadSound(Sound sound, const QString &filename, int instances = 1) {
+        if (m_players.size() <= sound)
+            m_players.resize(sound + 1);
+        m_players[sound] = new Player(QUrl::fromLocalFile(m_path + "/" + filename), instances, this);
+    }
+
     QVector<Player *> m_players;
 
     QString m_path;

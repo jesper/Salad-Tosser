@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     Accelerometer accelerometer;
 
     LoadScreen loadScreen;
-    loadScreen.setItemsToLoadCount(4);
+    loadScreen.setItemsToLoadCount(13);
 
     loadScreen.showFullScreen();
     loadScreen.repaint();
@@ -60,10 +60,11 @@ int main(int argc, char *argv[])
     loadScreen.itemLoaded("Salad Logic");
     viewer.setMainQmlFile(QLatin1String("qml/Pusku/main.qml"));
 
-// *Horrible hack* to get the path of the sound files (same location as qml files)
     loadScreen.itemLoaded("Cinematic Quality Audio");
+    // *Horrible hack* to get the path of the sound files (same location as qml files)
     Audio audio(QFileInfo(viewer.source().toLocalFile()).absoluteDir().path());
-
+    QObject::connect(&audio, SIGNAL(loaded(QString)), &loadScreen, SLOT(itemLoaded(QString)));
+    audio.startLoadingSounds();
 
     viewer.rootContext()->setContextProperty("audio", &audio);
     viewer.rootContext()->setContextProperty("accelerometer", &accelerometer);
