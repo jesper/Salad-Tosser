@@ -5,10 +5,14 @@ Entity {
 
     Image {
         source: {
-            if (Math.random() < 0.5)
+            var random_value = Math.random();
+            if (random_value < 0.4) {
                 return "salad_leaf.svg";
-            else
+            } else if (random_value < 0.8) {
                 return "vegetable.svg";
+            } else {
+                return "tomato.svg";
+            }
         }
 
         sourceSize.height: 96

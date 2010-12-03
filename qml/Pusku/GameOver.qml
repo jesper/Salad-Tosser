@@ -85,4 +85,16 @@ Popup {
         }
     }
 
+//    Image {
+//        source: "win.png"
+////        anchors.centerIn: parent
+////        sourceSize.height: 200
+////        sourceSize.width: 300
+//        height: 250
+//        width: 250
+//        y: 20
+//        x: parent.width/2 - width/2
+//        fillMode: Image.PreserveAspectFit
+//    }
+
 }
