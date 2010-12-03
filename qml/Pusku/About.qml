@@ -24,7 +24,7 @@ Rectangle {
     Text {
         id: instructionsText2
         y: 20 + instructionsText1.height
-        x: 260
+        x: instructionsText1.x + instructionsText1.width/5 * 4
         text: "squash bugs..."
         font.underline: true
         font.bold: true
@@ -36,7 +36,7 @@ Rectangle {
     Text {
         id: instructionsText3
         y: 20 + instructionsText1.height + instructionsText2.height
-        x: 500
+        x: instructionsText2.x + instructionsText2.width/5 * 4
         text: "avoid scorpions!"
         font.underline: true
         font.bold: true
@@ -47,7 +47,7 @@ Rectangle {
 
     Text {
         text: "Game written by..."
-        y: instructionsText3.height + 150
+        y: instructionsText3.y + instructionsText3.height + 30
         x: parent.width/2 - width/2
         color: "#CB0077"
         font.pixelSize: parent.height/13
@@ -66,8 +66,8 @@ Rectangle {
     Image {
         id:fabsAvatar
         source: "fabs.png"
-        height: 150
-        width: 150
+        height: parent.height/3
+        width: parent.height/3
         fillMode: Image.PreserveAspectFit
         y: parent.height - height - 50
         x: width * -1
@@ -87,8 +87,8 @@ Rectangle {
     Image {
         id:sammiAvatar
         source: "sammi.png"
-        height: 150
-        width: 150
+        height: parent.height/3
+        width: parent.height/3
         fillMode: Image.PreserveAspectFit
         y: parent.height - height - 50
         x: width * -1
@@ -108,8 +108,8 @@ Rectangle {
     Image {
         id:jefeAvatar
         source: "jefe.png"
-        height: 150
-        width: 150
+        height: parent.height/3
+        width: parent.height/3
         fillMode: Image.PreserveAspectFit
         y: parent.height - height - 50
         x: width * -1

@@ -43,7 +43,7 @@ Popup {
         id: quitButton
         buttonText: "Quit"
         x: parent.width/2 - width/2
-        y: (parent.height/4) * 3 - height/2 + 3
+        y: (parent.height/4) * 3 - height/2 + 6
 
         MouseArea {
             anchors.fill: parent
