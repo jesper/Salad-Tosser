@@ -1,7 +1,7 @@
 #ifndef ACCELEROMETER_H
 #define ACCELEROMETER_H
 
-#include <QtSensors/QAccelerometer>
+#include <QAccelerometer>
 
 class Accelerometer : public QObject
 {

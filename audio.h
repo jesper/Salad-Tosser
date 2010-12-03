@@ -1,6 +1,6 @@
 #ifndef AUDIO_H
 #define AUDIO_H
-#include <QtMultimediaKit/QMediaPlayer>
+#include <QMediaPlayer>
 #include <QFileInfo>
 #include <QDebug>
 #include <QCoreApplication>
