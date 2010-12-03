@@ -258,6 +258,8 @@ Item {
 
                 property int sec : 20;
                 property int min : 0;
+                property int realTime : 20;
+
                 property string secString;
                 property bool freeze: true;
 
@@ -266,6 +268,7 @@ Item {
                     onTriggered: {
                         if (gamescreen.running && !parent.freeze && !gamescreen.timerPaused) {
                             --parent.sec;
+                            parent.realTime = parent.min * 60 + parent.sec;
 
                             if (parent.sec == -1) {
                                 if (parent.min != 0) {
@@ -345,6 +348,7 @@ Item {
                 anchors.fill:  parent
 
                 property int score: 0
+
                 onScoreChanged: {
                     if (score < 0)
                         score = 0;

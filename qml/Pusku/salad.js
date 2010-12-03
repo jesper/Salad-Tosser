@@ -26,7 +26,7 @@ function levelUp() {
 
     gamescreen.level++;
 
-    var timeBonus = Math.floor((countdown.sec-1) / 5);
+    var timeBonus = Math.floor((countdown.realTime-1) / 5);
 
     if (timeBonus >= 1) {
         timeBonusText.text = "Good job, time bonus: " + timeBonus + "!";
@@ -302,8 +302,6 @@ function updateTimerString() {
 
 var timeBonusCount = 0;
 
-var lastBonus = null;
-
 function createTimeBonus() {
     if (componentTimeBonus == null)
         componentTimeBonus = Qt.createComponent("TimeBonus.qml");
@@ -318,7 +316,7 @@ function createTimeBonus() {
     ++timeBonusCount;
     gamescreen.timerPaused = true;
 
-    lastBonus = timeBonus;
+    countdown.realTime += 3;
 
     timeBonus.startAnimation();
 }
