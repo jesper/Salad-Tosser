@@ -217,8 +217,11 @@ function shaking(x, y) {
 
 // We just killed one insect (yay!).
 // We now need to update the count of remaining insects.
-function insectKilled() {
-    audio.playSquish();
+function insectKilled(insect) {
+    if (insect.type == 0)
+        audio.playSquash();
+    else
+        audio.playSquish();
     --insectsCount.numberOfInsectsRemaining;
 
     createScoreIncrement(1);

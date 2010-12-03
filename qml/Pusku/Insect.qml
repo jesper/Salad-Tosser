@@ -3,11 +3,12 @@ import Qt 4.7
 Entity {
     id:insect
     property bool killed: false
+    property int type: Math.random() < 0.5 ? 0 : 1;
 
     signal destroyed;
 
     Image {
-        source: "insect.svg"
+        source: type == 0 ? "insect.svg" : "ladybug.svg"
         sourceSize.height: 75
         sourceSize.width: 75
         fillMode: Image.PreserveAspectFit
@@ -32,7 +33,7 @@ Entity {
         onClicked: {
             killed = true
             insect.state = "dead"
-            main.insectKilled();
+            main.insectKilled(insect);
         }
     }
 

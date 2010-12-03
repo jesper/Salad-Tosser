@@ -451,8 +451,8 @@ Item {
         SaladLogic.shaking(x, y);
     }
 
-    function insectKilled() {
-        SaladLogic.insectKilled();
+    function insectKilled(insect) {
+        SaladLogic.insectKilled(insect);
     }
 
     function bittenByInsect() {

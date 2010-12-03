@@ -44,6 +44,7 @@ class Audio : public QObject {
         ReturnToGame,
         ReturnToMenu,
         Squish,
+        Squash,
         Shake,
         NumSounds,
         Theme,
@@ -84,6 +85,9 @@ public:
 
         loadSound(Squish, "squish.mp3", 3);
         emit loaded("Best sound file in the game");
+
+        loadSound(Squash, "squish2.mp3", 3);
+        emit loaded("Yet another squashing sound");
 
         loadSound(Shake, "shake.mp3");
         emit loaded("Jefe's dancing style");
@@ -140,6 +144,10 @@ public slots:
 
     void playSquish() {
         play(Squish);
+    }
+
+    void playSquash() {
+        play(Squash);
     }
 
     void playShake() {
