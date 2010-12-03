@@ -23,7 +23,7 @@ Popup {
         id: scorePlaceholder
         text: "Score:"
         font.bold: true
-        font.pointSize: 24.0
+        font.pixelSize: parent.height/4
         color: parent.scoreColor
 
         anchors.horizontalCenter: parent.horizontalCenter

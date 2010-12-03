@@ -13,7 +13,7 @@ Rectangle {
         id:aboutText
         anchors.centerIn:  parent
         text: "X"
-        font.pointSize: 60
+        font.pixelSize: parent.height
         font.bold: true
         color: "#E567B1"
     }

@@ -45,7 +45,6 @@ Item {
                     gamearea.opacity = 1
                 }
             }
-
         }
 
         states: [
@@ -87,7 +86,7 @@ Item {
                 id:aboutText
                 anchors.centerIn:  parent
                 text: "?"
-                font.pointSize: 60
+                font.pixelSize: parent.height
                 font.bold: true
                 color: "#E567B1"
             }
@@ -203,7 +202,7 @@ Item {
                 Text {
                     id: returnScreenText
                     text: "?"
-                    font.pointSize: 38
+                    font.pixelSize: parent.height
                     font.bold: true
                     color: "#E567B1"
                     anchors.centerIn: parent

@@ -22,9 +22,10 @@ Image {
         x: parent.width
         y: parent.height/3
         width: signText.width + 3
-        height: signText.height + 3
+        height: signText.height + 15
 
-        Rectangle {
+       //String looks super broken, removing for now
+       /* Rectangle {
             id:signString
             x: parent.x-parent.width
             y: parent.y/2
@@ -32,11 +33,12 @@ Image {
             height: 3
 
             color: "black"
-        }
+        }*/
 
         Text {
             id:signText
-            font.pointSize: 12
+            font.pixelSize: parent.height -3
+            y: parent.height/2 - height/2
             text: "Click the logo to start!"
         }
     }

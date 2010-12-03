@@ -16,7 +16,7 @@ Rectangle {
         text: "Shake the salad..."
         font.underline: true
         font.bold: true
-        font.pointSize: 28
+        font.pixelSize: parent.height/13
         color: "#CB0077"
 
     }
@@ -28,7 +28,7 @@ Rectangle {
         text: "squash bugs..."
         font.underline: true
         font.bold: true
-        font.pointSize: 28
+        font.pixelSize: parent.height/13
         color: "#CB0077"
 
     }
@@ -40,7 +40,7 @@ Rectangle {
         text: "avoid scorpions!"
         font.underline: true
         font.bold: true
-        font.pointSize: 28
+        font.pixelSize: parent.height/13
         color: "#CB0077"
 
     }
@@ -50,7 +50,7 @@ Rectangle {
         y: instructionsText3.height + 150
         x: parent.width/2 - width/2
         color: "#CB0077"
-        font.pointSize: 28
+        font.pixelSize: parent.height/13
         font.italic: true
     }
 
