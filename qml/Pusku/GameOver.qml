@@ -23,7 +23,7 @@ Popup {
         id: scorePlaceholder
         text: "Score:"
         font.bold: true
-        font.pixelSize: parent.height/4
+        font.pixelSize: parent.height/5
         color: parent.scoreColor
 
         anchors.horizontalCenter: parent.horizontalCenter
@@ -35,7 +35,7 @@ Popup {
 
         text: parent.finalScoreText
         font.bold: true
-        font.pointSize: 64.0
+        font.pixelSize: parent.height/5
         color: parent.scoreColor
 
         anchors.horizontalCenter: parent.horizontalCenter
@@ -47,7 +47,7 @@ Popup {
 
         text: parent.highScoreText
         font.bold: true
-        font.pointSize: 24.0
+        font.pixelSize: parent.height/6
         color: parent.scoreColor
 
         anchors.horizontalCenter: parent.horizontalCenter
