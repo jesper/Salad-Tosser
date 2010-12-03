@@ -2,6 +2,7 @@ var saladArray = null;
 var componentSaladItem = null;
 var componentInsectItem = null;
 var componentScorpionItem = null;
+var componentScoreIncrement = null;
 var componentTimeBonus = null;
 var gameStarted = false;
 var nbPieces = 15;
@@ -9,6 +10,7 @@ var nbInsects = 5;
 var nbScorpions = 2;
 
 var scorpionArray = null;
+var gameOverType;
 
 function restartGame() {
     nbPieces = 15;
@@ -33,6 +35,8 @@ function levelUp() {
     } else {
         timeBonusText.text = "Phew, close call!";
     }
+
+    createScoreIncrement(timeBonus);
 
     gameStarted = false;
     gamescreen.running = false;
@@ -216,8 +220,8 @@ function shaking(x, y) {
 function insectKilled() {
     audio.playSquish();
     --insectsCount.numberOfInsectsRemaining;
-    scoreBox.score += 1;
 
+    createScoreIncrement(1);
     createTimeBonus();
 
     if (insectsCount.numberOfInsectsRemaining == 0) {
@@ -231,18 +235,22 @@ function insectKilled() {
 function bittenByInsect() {
     audio.playOuch();
     --health.healthCount;
-    scoreBox.score -= 2;
+
+    createScoreIncrement(-2);
+
     if (health.healthCount == 0) {
-        gameOver("dead");
+        gameOverType = "dead";
+
+        gamescreen.running = false;
+        countdown.freeze = true;
+
+        gameOverAnimation.start();
     }
 }
 
 // The game is over.
-function gameOver(type) {
-    audio.playDeath();
-    countdown.freeze = true
+function gameOver() {
 
-    gamescreen.running = false;
 
     var high = updateHighScore();
 
@@ -251,13 +259,13 @@ function gameOver(type) {
     gameoverMenu.highScoreText =
         high < scoreBox.score ? "New high!" : "High: " + highText;
 
-    if (type == "timeout") {
+    if (gameOverType == "timeout") {
         gameoverMenu.source = "alarm.svg"
         console.log("game over, score: " + scoreBox.score + ", high: " + high);
-    } else if (type == "dead") {
+    } else if (gameOverType == "dead") {
         gameoverMenu.source = "scorpion.svg"
     } else {
-        console.log("Error: unsupported type of game over \"" + type + "\"")
+        console.log("Error: unsupported type of game over \"" + gameOverType + "\"")
     }
 
     gameoverMenu.opacity = 1
@@ -327,4 +335,26 @@ function destroyTimeBonus(timeBonus)
     if (timeBonusCount == 0)
         gamescreen.timerPaused = false;
     timeBonus.destroy();
+}
+
+function createScoreIncrement(increment) {
+    if (componentScoreIncrement == null)
+        componentScoreIncrement = Qt.createComponent("ScoreIncrement.qml");
+
+    var scoreIncrement = componentScoreIncrement.createObject(gamescreen);
+    if (scoreIncrement == null) {
+        console.log("error creating scoreIncrement");
+        console.log(componentScoreIncrement.errorString());
+        return null;
+    }
+
+    scoreIncrement.increment = Math.abs(increment);
+    scoreIncrement.sign = increment > 0 ? 1 : -1;
+
+    scoreIncrement.startAnimation();
+}
+
+function destroyScoreIncrement(scoreIncrement)
+{
+    scoreIncrement.destroy();
 }

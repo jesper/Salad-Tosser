@@ -467,6 +467,10 @@ Item {
         SaladLogic.destroyTimeBonus(timeBonus);
     }
 
+    function destroyScoreIncrement(scoreIncrement) {
+        SaladLogic.destroyScoreIncrement(scoreIncrement);
+    }
+
     function increaseTimer() {
         countdown.sec++;
         SaladLogic.updateTimerString();
@@ -492,5 +496,12 @@ Item {
             PauseAnimation { duration: 3000 }
             PauseAnimation { duration: 2000 }
         }
+    }
+
+    SequentialAnimation {
+        id: gameOverAnimation
+        ScriptAction { script: audio.playDeath(); }
+        PauseAnimation { duration: 500; }
+        ScriptAction { script: SaladLogic.gameOver(); }
     }
 }

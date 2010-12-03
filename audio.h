@@ -102,12 +102,12 @@ public:
 
         loadSound(Beep, "beep.mp3");
         emit loaded("You'll hate hearing this sound");
-
     }
 
 public slots:
     void play(Sound sound) {
-        m_players.at(sound)->play();
+        if (m_players.at(sound))
+            m_players.at(sound)->play();
     }
 
     void playStartGame() {
