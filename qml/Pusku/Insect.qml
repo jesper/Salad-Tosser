@@ -4,10 +4,12 @@ Entity {
     id:insect
     property bool killed: false
     property int type: Math.random() < 0.5 ? 0 : 1;
+    property alias representation: insectImage.source
 
     signal destroyed;
 
     Image {
+        id: insectImage
         source: type == 0 ? "insect.svg" : "ladybug.svg"
         sourceSize.height: 75
         sourceSize.width: 75
@@ -39,8 +41,9 @@ Entity {
 
     states: State {
         name: "dead";
-        PropertyChanges { target: insect; opacity: 0 }
-        PropertyChanges { target: insect; scale: 2 }
+//        PropertyChanges { target: insect; opacity: 0 }
+        PropertyChanges { target: insect; scale: 1.5 }
+        PropertyChanges { target: insect; representation: "splash.svg"}
     }
 
     transitions: [
