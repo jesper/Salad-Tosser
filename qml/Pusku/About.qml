@@ -10,10 +10,34 @@ Rectangle {
     }
 
     Text {
-        id: instructionsText
+        id: instructionsText1
         y: 20
-        x: parent.width/2 - width/2
-        text: "Start the game by clicking the logo."
+        x: 20
+        text: "Shake the salad..."
+        font.underline: true
+        font.bold: true
+        font.pointSize: 28
+        color: "#CB0077"
+
+    }
+
+    Text {
+        id: instructionsText2
+        y: 20 + instructionsText1.height
+        x: 260
+        text: "squash bugs..."
+        font.underline: true
+        font.bold: true
+        font.pointSize: 28
+        color: "#CB0077"
+
+    }
+
+    Text {
+        id: instructionsText3
+        y: 20 + instructionsText1.height + instructionsText2.height
+        x: 500
+        text: "avoid scorpions!"
         font.underline: true
         font.bold: true
         font.pointSize: 28
@@ -23,7 +47,7 @@ Rectangle {
 
     Text {
         text: "Game written by..."
-        y: instructionsText.height + 100
+        y: instructionsText3.height + 150
         x: parent.width/2 - width/2
         color: "#CB0077"
         font.pointSize: 28

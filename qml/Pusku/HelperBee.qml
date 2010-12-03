@@ -19,9 +19,21 @@ Image {
     Rectangle
     {
         id:sign
-        x: parent.width/2 - width
+        x: parent.width
+        y: parent.height/3
         width: signText.width + 3
         height: signText.height + 3
+
+        Rectangle {
+            id:signString
+            x: parent.x-parent.width
+            y: parent.y/2
+            width: 20
+            height: 3
+
+            color: "black"
+        }
+
         Text {
             id:signText
             font.pointSize: 12
