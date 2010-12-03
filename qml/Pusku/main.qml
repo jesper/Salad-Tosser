@@ -502,6 +502,6 @@ Item {
         id: gameOverAnimation
         ScriptAction { script: audio.playDeath(); }
         PauseAnimation { duration: 500; }
-        ScriptAction { script: SaladLogic.gameOver(); }
+        ScriptAction { script: SaladLogic.gameOverScreen(); }
     }
 }

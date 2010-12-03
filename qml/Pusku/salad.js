@@ -239,19 +239,22 @@ function bittenByInsect() {
     createScoreIncrement(-2);
 
     if (health.healthCount == 0) {
-        gameOverType = "dead";
-
-        gamescreen.running = false;
-        countdown.freeze = true;
-
-        gameOverAnimation.start();
+        gameOver("dead");
     }
 }
 
+function gameOver(type)
+{
+    gameOverType = type;
+
+    gamescreen.running = false;
+    countdown.freeze = true;
+
+    gameOverAnimation.start();
+}
+
 // The game is over.
-function gameOver() {
-
-
+function gameOverScreen() {
     var high = updateHighScore();
 
     var highText = high;
