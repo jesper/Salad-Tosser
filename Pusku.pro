@@ -39,7 +39,8 @@ OTHER_FILES +=
 HEADERS += \
     accelerometer.h \
     audio.h \
-    loadscreen.h
+    loadscreen.h \
+    helper.h
 
 RESOURCES += \
     resources.qrc

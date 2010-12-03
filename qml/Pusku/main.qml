@@ -3,8 +3,8 @@ import "salad.js" as SaladLogic
 
 
 Item {
-    width: 800
-    height: 480
+    width: helper.getScreenWidth();
+    height: helper.getScreenHeight();
 
     id: main
 

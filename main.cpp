@@ -7,6 +7,7 @@
 #include <QLayout>
 
 #include "loadscreen.h"
+#include "helper.h"
 #include "qmlapplicationviewer.h"
 #include "accelerometer.h"
 #include "audio.h"
@@ -47,18 +48,22 @@ int main(int argc, char *argv[])
     Accelerometer accelerometer;
 
     LoadScreen loadScreen;
-    loadScreen.setItemsToLoadCount(18);
+    loadScreen.setItemsToLoadCount(19);
 
     loadScreen.showFullScreen();
     loadScreen.repaint();
 
     app.processEvents();
 
+    Helper helper;
+    loadScreen.itemLoaded("Analyzing device specs");
+
     QmlApplicationViewer viewer;
     loadScreen.itemLoaded("Next-Gen Graphics Engine");
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationLockLandscape);
 
     loadScreen.itemLoaded("Salad Logic");
+    viewer.rootContext()->setContextProperty("helper", &helper);
     viewer.setMainQmlFile(QLatin1String("qml/Pusku/main.qml"));
 
     loadScreen.itemLoaded("Cinematic Quality Audio");
