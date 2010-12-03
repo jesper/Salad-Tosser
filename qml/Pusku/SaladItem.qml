@@ -2,15 +2,20 @@ import Qt 4.7
 
 Entity {
     id: saladItem
+    property int type: 0
 
     Image {
+        id: saladItemImage
         source: {
             var random_value = Math.random();
             if (random_value < 0.4) {
+                parent.type = 1;
                 return "salad_leaf.svg";
             } else if (random_value < 0.8) {
+                parent.type = 2;
                 return "vegetable.svg";
             } else {
+                parent.type = 3;
                 return "tomato.svg";
             }
         }

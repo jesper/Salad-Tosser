@@ -101,6 +101,11 @@ function createSaladItem() {
 
     var size = Math.random() * 30 + 110;
 
+    // We make the tomatoes smaller.
+    if (saladItem.type == 3) {
+        size = size * 0.7;
+    }
+
     saladItem.width = size;
     saladItem.height = size;
 
@@ -173,6 +178,11 @@ function createInsectItem() {
     }
 
     var size = 75;
+
+    // We make the lady bugs smaller.
+    if (insectItem.type == 1) {
+        size = size * 0.7;
+    }
 
     insectItem.width = size;
     insectItem.height = size;
