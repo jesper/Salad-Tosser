@@ -396,7 +396,7 @@ Item {
 
             Text {
                 id: timeBonusText
-                font.pointSize: 24
+                font.pixelSize: parent.height/5
                 text: "Good job!"
                 anchors.bottom: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -404,7 +404,7 @@ Item {
             }
 
             Text {
-                font.pointSize: 24
+                font.pixelSize: parent.height/5
                 text: "Prepare for level " + gamescreen.level
                 anchors.top: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
