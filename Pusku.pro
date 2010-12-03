@@ -3,6 +3,8 @@ folder_01.source = qml/Pusku
 folder_01.target = qml
 DEPLOYMENTFOLDERS = folder_01
 
+TARGET = TossMySalad
+
 QT += opengl
 MOBILITY = multimedia
 # Additional import path used to resolve QML modules in Creator's code model

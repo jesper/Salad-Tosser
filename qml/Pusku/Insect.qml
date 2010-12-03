@@ -44,7 +44,7 @@ Entity {
         PropertyChanges { target: insect; scale: 1.5 }
         PropertyChanges { target: insect; representation: "splash.svg"}
         PropertyChanges { target: insect; opacity: 0.3 }
-
+        PropertyChanges { target: insect; z: 1}
     }
 
     transitions: [

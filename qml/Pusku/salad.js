@@ -111,7 +111,7 @@ function createSaladItem() {
 
     saladItem.x = Math.random() * (gamearea.width - saladItem.width);
     saladItem.y = Math.random() * (gamearea.height - saladItem.height);
-    saladItem.z = 2 + Math.random() * (nbPieces + nbInsects);
+    saladItem.z = 3 + Math.random() * (nbPieces + nbInsects);
     saladItem.rotation = Math.random() * 360;
 
     saladItem.shakeFactor = 1.0;
@@ -189,7 +189,7 @@ function createInsectItem() {
 
     insectItem.x = Math.random() * (gamearea.width - insectItem.width);
     insectItem.y = Math.random() * (gamearea.height - insectItem.height);
-    insectItem.z = 1;
+    insectItem.z = 2;
 
     insectItem.shakeFactor = 0.9;
 
