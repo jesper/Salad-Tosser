@@ -17,6 +17,7 @@ DEFINES += ORIENTATIONLOCK
 #DEFINES += NETWORKACCESS
 
 symbian:TARGET.UID3 = 0xE6003429
+symbian:LIBS += -lcone -leikcore -lavkon
 
 # Define QMLJSDEBUGGER to allow debugging of QML in debug builds
 # (This might significantly increase build time)

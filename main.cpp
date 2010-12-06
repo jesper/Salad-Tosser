@@ -6,6 +6,13 @@
 #include <QDir>
 #include <QLayout>
 
+#if defined(Q_OS_SYMBIAN)
+#include <eikenv.h>
+#include <eikappui.h>
+#include <aknenv.h>
+#include <aknappui.h>
+#endif // Q_OS_SYMBIAN
+
 #include "loadscreen.h"
 #include "helper.h"
 #include "qmlapplicationviewer.h"
@@ -31,7 +38,13 @@ void Accelerometer::checkReading()
     QtMobility::QAccelerometerReading *reading = m_accelerometer->reading();
 
     if (QVector3D(reading->x(), reading->y(), reading->z()).length() > 16.0)
+    {
+#ifdef Q_OS_SYMBIAN
+        emit shake(reading->y(), reading->x());
+#else
         emit shake(-reading->x(), reading->y());
+#endif
+    }
 }
 
 bool Accelerometer::isEnabled()
@@ -41,9 +54,20 @@ bool Accelerometer::isEnabled()
 
 int main(int argc, char *argv[])
 {
-    QApplication::setGraphicsSystem("raster");
     QApplication app(argc, argv);
-    app.setStyle("plastique"); //Looks better than native style in many cases
+    QApplication::setGraphicsSystem("opengl");
+
+#ifdef Q_WS_MAEMO_5
+    app.setStyle("plastique"); //Looks better than native style IMO
+    QApplication::setGraphicsSystem("raster");
+#endif
+
+#ifdef Q_OS_SYMBIAN
+    CAknAppUi* appUi = dynamic_cast<CAknAppUi*> (CEikonEnv::Static()->AppUi());
+
+    if (appUi)
+        appUi->SetOrientationL(CAknAppUi::EAppUiOrientationLandscape);
+#endif
 
     Accelerometer accelerometer;
 
