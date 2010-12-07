@@ -35,8 +35,14 @@ Item {
             fillMode: Image.PreserveAspectFit
             y:height * -1
             x:menuScreen.width/2 - width/2
-
             PropertyAnimation on y { to:((main.height/2) - (logoImage.height/2)); duration: 2000; easing.type: Easing.OutBounce}
+
+
+            SequentialAnimation on scale {
+                loops: Animation.Infinite;
+                PropertyAnimation { to:1.05; duration: 500; easing.type: Easing.InOutQuad}
+                PropertyAnimation { to:1; duration: 500; easing.type: Easing.InOutQuad}
+            }
 
             MouseArea {
                 anchors.fill:  parent
@@ -98,7 +104,7 @@ Item {
                 anchors.fill:  parent
                 onClicked: {
                     audio.playAbout();
-                    aboutScreen.opacity = 1
+                    aboutScreen.state = "visible"
                 }
             }
 

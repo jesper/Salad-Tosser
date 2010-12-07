@@ -2,7 +2,8 @@ import Qt 4.7
 
 Popup {
     id: menuWindow
-    width: mainScreenButton.width + 30
+    width: mainScreenButton.width + 40
+
     PopupButton {
         id: returnButton
 

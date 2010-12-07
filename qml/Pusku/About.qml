@@ -4,10 +4,12 @@ Rectangle {
     id: about
     color: "#A2EF00"
     anchors.fill:  parent
+    opacity:0
 
     MouseArea {
         anchors.fill: parent
     }
+
 
     Text {
         id: instructionsText1
@@ -58,7 +60,7 @@ Rectangle {
         MouseArea {
             anchors.fill:  parent
             onClicked: {
-                about.opacity = 0
+                about.state = ""
             }
         }
     }
@@ -128,10 +130,12 @@ Rectangle {
 
     states: [
         State {
-            name: "visible"; when: about.opacity == 1
+            name: "visible";
             PropertyChanges { target: fabsAvatar; x: (about.width/4)*3-fabsAvatar.width/2; rotation: 360 }
             PropertyChanges { target: sammiAvatar; x: (about.width/4)*2-sammiAvatar.width/2; rotation: 360 }
             PropertyChanges { target: jefeAvatar; x: (about.width/4)-jefeAvatar.width/2; rotation: 360 }
+            PropertyChanges { target: about; opacity: 1;}
+
         }
     ]
 
@@ -140,11 +144,19 @@ Rectangle {
             from: "";
             to: "visible";
             SequentialAnimation {
-                NumberAnimation { target: fabsAvatar; properties: "rotation,x"; duration: 800 }
-                NumberAnimation { target: sammiAvatar; properties: "rotation,x"; duration: 800 }
-                NumberAnimation { target: jefeAvatar; properties: "rotation,x"; duration: 800 }
+                NumberAnimation { target: about; property: "opacity"; duration: 1000 }
+                NumberAnimation { target: fabsAvatar; properties: "rotation,x"; duration: 1000 }
+                NumberAnimation { target: sammiAvatar; properties: "rotation,x"; duration: 1000 }
+                NumberAnimation { target: jefeAvatar; properties: "rotation,x"; duration: 1000 }
+
+            }},
+            Transition {
+                from: "visible";
+                to: "";
+                SequentialAnimation {
+                    NumberAnimation { target: about; property: "opacity"; duration: 1000 }
+                }
             }
-        }
 
     ]
-}
+        }

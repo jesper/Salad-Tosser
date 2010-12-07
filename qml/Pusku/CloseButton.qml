@@ -6,7 +6,7 @@ Rectangle {
     width: 75
     height: 75
     x: parent.width - width
-    opacity: 1
+    opacity: 0
     radius:10
 
     Text {
@@ -17,5 +17,7 @@ Rectangle {
         font.bold: true
         color: "#E567B1"
     }
+
+    PropertyAnimation on opacity { to: 1; duration: 2000; easing.type: Easing.InOutSine}
 
 }
