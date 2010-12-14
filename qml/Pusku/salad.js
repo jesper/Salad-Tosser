@@ -142,6 +142,9 @@ function createScorpionItem() {
 
     scorpionItem.placed = true;
 
+    if (Math.random() <= 0.001)
+        Qt.createQmlObject('import Qt 4.7; Image {source: "easteregg.svg"; smooth:true; x: 50; y: 30; sourceSize.width: 40; sourceSize.height: 40; width: 55; height: 55}',
+                           scorpionItem, "headwear");
     return scorpionItem;
 }
 
