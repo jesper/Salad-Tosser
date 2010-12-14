@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
     loadScreen.itemLoaded("Analyzing device specs");
 
     QmlApplicationViewer viewer;
-    QObject::connect(&viewer, SIGNAL(statusChanged(QDeclarativeView::Status)), &loadScreen, SLOT(hideMe(QDeclarativeView::Status)));
+    QObject::connect(&viewer, SIGNAL(statusChanged(QDeclarativeView::Status)), &loadScreen, SLOT(declarativeStatusUpdate(QDeclarativeView::Status)));
 
     loadScreen.itemLoaded("Next-Gen Graphics Engine");
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationLockLandscape);
@@ -111,5 +111,6 @@ int main(int argc, char *argv[])
 
 
     viewer.showFullScreen();
+    loadScreen.resourcesReady();
     return app.exec();
 }

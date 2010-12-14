@@ -11,6 +11,8 @@ LoadScreen::LoadScreen(QWidget *parent) :
 
     m_loadedCount = 0;
     m_itemsToLoadCount = 0;
+    m_declarativeReady = false;
+    m_resourcesReady = false;
 }
 
 void LoadScreen::itemLoaded(QString item)
@@ -31,8 +33,24 @@ LoadScreen::~LoadScreen()
     delete ui;
 }
 
-void LoadScreen::hideMe(QDeclarativeView::Status status)
+void LoadScreen::resourcesReady()
+{
+    m_resourcesReady = true;
+    hideIfReady();
+}
+
+void LoadScreen::declarativeStatusUpdate(QDeclarativeView::Status status)
 {
     if (status == QDeclarativeView::Ready)
+    {
+
+        m_declarativeReady = true;
+        hideIfReady();
+    }
+}
+
+void LoadScreen::hideIfReady()
+{
+    if (m_declarativeReady && m_resourcesReady)
         hide();
 }
