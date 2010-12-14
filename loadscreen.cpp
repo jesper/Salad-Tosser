@@ -30,3 +30,9 @@ LoadScreen::~LoadScreen()
 {
     delete ui;
 }
+
+void LoadScreen::hideMe(QDeclarativeView::Status status)
+{
+    if (status == QDeclarativeView::Ready)
+        hide();
+}

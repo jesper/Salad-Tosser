@@ -72,6 +72,7 @@ int main(int argc, char *argv[])
     Accelerometer accelerometer;
 
     LoadScreen loadScreen;
+    loadScreen.setWindowFlags(Qt::WindowStaysOnTopHint);
     loadScreen.setItemsToLoadCount(19);
 
     loadScreen.showFullScreen();
@@ -83,6 +84,8 @@ int main(int argc, char *argv[])
     loadScreen.itemLoaded("Analyzing device specs");
 
     QmlApplicationViewer viewer;
+    QObject::connect(&viewer, SIGNAL(statusChanged(QDeclarativeView::Status)), &loadScreen, SLOT(hideMe(QDeclarativeView::Status)));
+
     loadScreen.itemLoaded("Next-Gen Graphics Engine");
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationLockLandscape);
 
@@ -108,6 +111,5 @@ int main(int argc, char *argv[])
 
 
     viewer.showFullScreen();
-    loadScreen.hide();
     return app.exec();
 }

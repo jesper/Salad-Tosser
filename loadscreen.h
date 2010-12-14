@@ -2,7 +2,7 @@
 #define LOADSCREEN_H
 
 #include <QWidget>
-
+#include <QDeclarativeView>
 namespace Ui {
     class LoadScreen;
 }
@@ -18,6 +18,7 @@ public:
 
 public slots:
     void itemLoaded(QString item);
+    void hideMe(QDeclarativeView::Status status);
 
 private:
     Ui::LoadScreen *ui;
