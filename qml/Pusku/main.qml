@@ -87,7 +87,6 @@ Item {
             width: 75
             height: 75
             opacity: 0
-            radius:10
 
             PropertyAnimation on opacity { to: 1; duration: 2000; easing.type: Easing.InOutSine}
 
@@ -202,7 +201,6 @@ Item {
             Rectangle {
                 id: menuButton
                 color: "#CBF76F"
-                radius:10
                 width: parent.width - 20
                 height: width
                 x: 10

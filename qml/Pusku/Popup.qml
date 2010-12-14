@@ -15,7 +15,6 @@ Item {
         id:popupShadow
         color: "black"
         opacity: 0.5
-        radius: 10
         anchors.fill: parent
     }
 
@@ -23,7 +22,6 @@ Item {
         id:popupContent
         color: "#A2EF00"
         opacity: 1
-        radius: 10
         x: 10
         y: 10
         width: parent.width - 20

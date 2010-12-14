@@ -10,7 +10,7 @@ Popup {
         x: parent.width/2 - width/2
         y: (parent.height/4) - height/2
 
-        buttonText: "Return to Game"
+        buttonText: "Return"
 
         MouseArea {
             anchors.fill:  parent
@@ -27,7 +27,7 @@ Popup {
         id: mainScreenButton
         x: parent.width/2 - width/2
         y: (parent.height/4) * 2 - height/2 + 3
-        buttonText: "Exit to Main Screen"
+        buttonText: "Main Screen"
 
         MouseArea {
             anchors.fill: parent

@@ -7,7 +7,6 @@ Rectangle {
     height: 75
     x: parent.width - width
     opacity: 0
-    radius:10
 
     Text {
         id:aboutText

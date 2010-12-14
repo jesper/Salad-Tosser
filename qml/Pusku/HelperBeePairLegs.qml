@@ -8,12 +8,11 @@ Item {
         width: 5
         height: body.height/3
         color: "black"
-        radius: 10
 
         SequentialAnimation on y {
             loops: Animation.Infinite
-            PropertyAnimation { to:(body.height/4)*3; duration: 300;}
-            PropertyAnimation { to:(body.height/4)*2; duration: 300;}
+            PropertyAnimation { to:(body.height/5)*3; duration: 300;}
+            PropertyAnimation { to:(body.height/5)*2; duration: 300;}
         }
 
     }
@@ -24,12 +23,12 @@ Item {
         height: body.height/3
         color: "black"
         x: 10
-        radius: 10
+
 
         SequentialAnimation on y {
             loops: Animation.Infinite
-            PropertyAnimation { to:(body.height/4)*2; duration: 300;}
-            PropertyAnimation { to:(body.height/4)*3; duration: 300;}
+            PropertyAnimation { to:(body.height/5)*2; duration: 300;}
+            PropertyAnimation { to:(body.height/5)*3; duration: 300;}
         }
 
     }
