@@ -463,8 +463,8 @@ Item {
         SaladLogic.insectKilled(insect);
     }
 
-    function bittenByInsect() {
-        SaladLogic.bittenByInsect();
+    function bittenByInsect(scorpion) {
+        SaladLogic.bittenByInsect(scorpion);
     }
 
     function moveScorpion(scorpioni) {

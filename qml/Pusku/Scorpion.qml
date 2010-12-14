@@ -3,6 +3,18 @@ import Qt 4.7
 Entity {
     id: scorpion
     property bool bitten: false
+    property int pointsValue: -2
+
+
+    Text {
+        id: pointsText
+        text: parent.pointsValue;
+        opacity: 1
+        anchors.centerIn: parent
+        z: parent.z - 3
+        smooth: true
+        color: "red"
+    }
 
     Image {
         source: "scorpion.svg"
@@ -17,14 +29,14 @@ Entity {
     property real moveDuration: 100;
 
     Behavior on x {
-         enabled: scorpion.placed;
-         NumberAnimation {easing.type: Easing.OutInQuad; duration: scorpion.moveDuration}
-     }
+        enabled: scorpion.placed;
+        NumberAnimation {easing.type: Easing.OutInQuad; duration: scorpion.moveDuration}
+    }
 
     Behavior on y {
-         enabled: scorpion.placed;
-         NumberAnimation {easing.type: Easing.OutInQuad; duration: scorpion.moveDuration}
-     }
+        enabled: scorpion.placed;
+        NumberAnimation {easing.type: Easing.OutInQuad; duration: scorpion.moveDuration}
+    }
 
     MouseArea {
         id: mouseArea
@@ -38,7 +50,7 @@ Entity {
             if (!bitten) {
                 bitten = true;
                 scorpion.state = "pushed"
-                main.bittenByInsect();
+                main.bittenByInsect(scorpion);
             }
         }
     }
@@ -92,7 +104,8 @@ Entity {
         State {
             name: "pushed";
             PropertyChanges { target: scorpion; opacity: 0 }
-            PropertyChanges { target: scorpion; scale: 2 }
+            PropertyChanges { target: scorpion; scale: 1.5 }
+            PropertyChanges { target: pointsText; z: parent.z+1; opacity: 0; scale: 2}
         }
     ]
 
@@ -100,9 +113,13 @@ Entity {
         Transition {
             from: "*"
             to: "pushed"
-            SequentialAnimation {
-                NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; duration: 300 }
-                NumberAnimation { target: scorpion; property: "opacity"; duration: 400 }
+            ParallelAnimation {
+                SequentialAnimation {
+                    NumberAnimation { target: scorpion; property: "scale"; easing.type: Easing.OutInQuad; duration: 300 }
+                    NumberAnimation { target: scorpion; property: "opacity"; duration: 400 }
+                }
+                NumberAnimation { target: pointsText; properties: "scale,opacity,z"; duration: 800 }
+
             }
         }
     ]

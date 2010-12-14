@@ -237,7 +237,7 @@ function insectKilled(insect) {
         audio.playSquish();
     --insectsCount.numberOfInsectsRemaining;
 
-    createScoreIncrement(1);
+    createScoreIncrement(insect.pointsValue);
     createTimeBonus();
 
     if (insectsCount.numberOfInsectsRemaining == 0) {
@@ -248,11 +248,11 @@ function insectKilled(insect) {
 
 // We just got bitten by one insect (/o\).
 // We now need to update our health.
-function bittenByInsect() {
+function bittenByInsect(scorpion) {
     audio.playOuch();
     --health.healthCount;
 
-    createScoreIncrement(-2);
+    createScoreIncrement(scorpion.pointsValue);
 
     if (health.healthCount == 0) {
         gameOver("dead");
