@@ -213,6 +213,9 @@ function shaking(x, y) {
         var new_x = saladArray[i].x + saladArray[i].shakeFactor * ((Math.random() + 0.5) * 6 * x + (Math.random() - 0.5) * 160);
         var new_y = saladArray[i].y + saladArray[i].shakeFactor * ((Math.random() + 0.5) * 6 * y + (Math.random() - 0.5) * 160);
 
+        if (saladArray[i].state == "dead")
+            continue;
+
         saladArray[i].x = Math.max(0,
             Math.min(gamearea.width - saladArray[i].width, new_x));
         saladArray[i].y = Math.max(0,
