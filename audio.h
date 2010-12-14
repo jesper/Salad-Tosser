@@ -14,6 +14,10 @@ public:
         instances = qMax(1, instances);
         for (int i = 0; i < instances; ++i) {
             QMediaPlayer *player = new QMediaPlayer(this);
+#ifdef Q_OS_SYMBIAN
+            // Manually set since it doesnt seem like QtMultimedia/Symbian cares about the volume settings on the phone itself
+            player->setVolume(65);
+#endif
             player->setMedia(url);
             m_players << player;
         }
